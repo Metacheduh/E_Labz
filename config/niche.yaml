@@ -1,0 +1,35 @@
+research:
+  primary_niche: "AI agents and automation"
+  secondary_niches:
+    - "no-code AI tools"
+    - "AI side hustles"
+    - "prompt engineering"
+    - "AI productivity hacks"
+    - "autonomous AI systems"
+  topic_weights:
+    ai_agents: 1.0
+    automation: 0.9
+    side_hustles: 0.8
+    prompt_engineering: 0.7
+    productivity: 0.6
+  banned_topics:
+    - "crypto scams"
+    - "get-rich-quick schemes"
+    - "MLM"
+    - "gambling"
+  min_trend_score: 7
+  max_topics_per_day: 3
+
+content:
+  voice: "friendly"  # Maps to humanize.py VOICE_PROFILES["friendly"]
+  tone: "friendly, helpful, specific, sharing discoveries"
+  persona_file: "config/persona.yaml"  # Full persona definition
+  target_audience:
+    - "solopreneurs"
+    - "AI builders"
+    - "curious beginners"
+  content_pillars:
+    - "AI automation tutorials"
+    - "Honest tool reviews and comparisons"
+    - "Behind-the-scenes of what we're building"
+    - "Quick tips and discoveries"

@@ -224,7 +224,7 @@ a:hover { color: #fff; }
 .btn-primary:hover::after { opacity:1; }
 .btn-ghost {
   background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.1); color:var(--text);
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
 }
 .btn-ghost:hover { background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.3); color:#fff; transform:translateY(-2px); }
 .btn-sm { padding:12px 24px; font-size:.85rem; }

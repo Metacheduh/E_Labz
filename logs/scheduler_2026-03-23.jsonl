@@ -1,0 +1,5 @@
+{"timestamp": "2026-03-23T22:17:16.949918", "type": "scheduler", "event": "swarm_started", "job_name": "main", "details": "14 jobs loaded"}
+{"timestamp": "2026-03-23T22:17:16.950380", "type": "scheduler", "event": "job_start", "job_name": "metrics_sync", "details": ""}
+{"timestamp": "2026-03-23T22:29:09.901284", "type": "scheduler", "event": "job_start", "job_name": "reply_engagement", "details": ""}
+{"timestamp": "2026-03-23T23:00:18.374547", "type": "scheduler", "event": "job_start", "job_name": "metrics_sync", "details": ""}
+{"timestamp": "2026-03-23T23:30:19.778947", "type": "scheduler", "event": "job_start", "job_name": "self_learning", "details": ""}

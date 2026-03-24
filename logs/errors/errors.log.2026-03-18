@@ -1,0 +1,31 @@
+2026-03-18 08:13:17 | ERROR   | swarm | 💥 ERROR [test]: This is a test error
+2026-03-18 08:21:37 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-18 08:28:29 | ERROR   | swarm | 💥 ERROR [reply_engine]: All reply methods failed
+2026-03-18 08:35:11 | ERROR   | swarm | 💥 ERROR [reply_engine]: All reply methods failed
+2026-03-18 10:30:27 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-18 10:31:22 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-18 10:32:45 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-18 10:34:06 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-18 10:35:29 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-18 10:36:30 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-18 10:37:26 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-18 15:03:00 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-18 15:11:19 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-18 15:48:49 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-18 16:33:41 | ERROR   | swarm | Tweet discovery failed for @haborobotics: HTTPSConnectionPool(host='api.tavily.com', port=443): Read timed out. (read timeout=15)
+2026-03-18 16:33:43 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-18 19:33:19 | ERROR   | swarm | Tweet discovery failed for @buildspace: HTTPSConnectionPool(host='api.tavily.com', port=443): Read timed out. (read timeout=15)
+2026-03-18 19:33:21 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.

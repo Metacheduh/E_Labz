@@ -1,0 +1,13 @@
+{"timestamp": "2026-03-24T00:30:36.637573", "type": "scheduler", "event": "job_start", "job_name": "engagement", "details": ""}
+{"timestamp": "2026-03-24T02:31:15.164624", "type": "scheduler", "event": "job_start", "job_name": "engagement", "details": ""}
+{"timestamp": "2026-03-24T05:04:12.048793", "type": "scheduler", "event": "job_start", "job_name": "engagement", "details": ""}
+{"timestamp": "2026-03-24T07:00:04.344372", "type": "scheduler", "event": "swarm_started", "job_name": "main", "details": "14 jobs loaded"}
+{"timestamp": "2026-03-24T07:00:04.344941", "type": "scheduler", "event": "job_start", "job_name": "metrics_sync", "details": ""}
+{"timestamp": "2026-03-24T07:04:29.273882", "type": "scheduler", "event": "job_start", "job_name": "engagement", "details": ""}
+{"timestamp": "2026-03-24T08:00:05.996380", "type": "scheduler", "event": "job_start", "job_name": "metrics_sync", "details": ""}
+{"timestamp": "2026-03-24T08:00:09.909807", "type": "scheduler", "event": "job_start", "job_name": "metrics_sync", "details": ""}
+{"timestamp": "2026-03-24T09:00:24.503291", "type": "scheduler", "event": "job_start", "job_name": "engagement", "details": ""}
+{"timestamp": "2026-03-24T09:04:54.956998", "type": "scheduler", "event": "job_start", "job_name": "engagement", "details": ""}
+{"timestamp": "2026-03-24T10:30:00.125594", "type": "scheduler", "event": "job_start", "job_name": "reply_engagement", "details": ""}
+{"timestamp": "2026-03-24T10:30:00.142119", "type": "scheduler", "event": "job_start", "job_name": "reply_engagement", "details": ""}
+{"timestamp": "2026-03-24T10:30:10.204702", "type": "scheduler", "event": "job_start", "job_name": "reply_engagement", "details": ""}

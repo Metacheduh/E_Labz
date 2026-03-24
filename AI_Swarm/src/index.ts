@@ -5,6 +5,7 @@
 // and X posts about AI workflows & agents in Jay Shetty's voice.
 // ============================================================================
 
+import 'dotenv/config';
 import { genkit, z } from 'genkit';
 import { googleAI } from '@genkit-ai/google-genai';
 import { startFlowServer } from '@genkit-ai/express';
@@ -17,7 +18,7 @@ const ai = genkit({
   })],
 });
 
-const model = googleAI.model('gemini-2.5-flash');
+const model = googleAI.model('gemini-1.5-flash');
 
 // ─── Jay Shetty Voice DNA ───────────────────────────────────────────────────
 

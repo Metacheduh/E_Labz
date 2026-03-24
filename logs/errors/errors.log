@@ -1,0 +1,21 @@
+2026-03-19 00:55:23 | ERROR   | swarm | Tweet discovery failed for @indiehackers: HTTPSConnectionPool(host='api.tavily.com', port=443): Read timed out. (read timeout=15)
+2026-03-19 03:41:21 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-19 06:35:01 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-19 08:46:32 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-19 09:34:19 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-19 09:34:51 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-19 09:36:18 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-19 09:37:42 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-19 09:39:13 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-19 09:40:24 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.
+2026-03-19 10:30:19 | ERROR   | swarm | 💥 ERROR [reply_engine]: 402 Payment Required
+Your enrolled account [2034104044961124352] does not have any credits to fulfill this request.

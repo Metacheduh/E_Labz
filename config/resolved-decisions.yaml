@@ -1,0 +1,115 @@
+# Resolved Decisions — Always check this first in every new conversation
+# This file prevents re-flagging issues that have already been solved.
+# Updated: 2026-03-19
+
+posting_method:
+  decision: "Browser-based posting is the primary method"
+  date: "2026-03-18"
+  context: "Twitter API returns 402 (credits exhausted). Browser poster handles all posting."
+  resolved: true
+  details: "browser_poster.py uses Puppeteer to post tweets and replies directly. Works reliably."
+
+twitter_api:
+  decision: "Twitter API is only used for free-tier profile reads (follower count, post count)"
+  date: "2026-03-18"
+  context: "402 Payment Required on write endpoints. $200/mo Basic tier not worth it at 167 followers."
+  resolved: true
+  revisit_at: "1000+ followers"
+
+engagement_tracking:
+  decision: "Use follower growth rate as proxy for engagement metrics"
+  date: "2026-03-18"
+  context: "Per-tweet analytics (impressions, likes) are paywalled. Follower delta is the KPI."
+  resolved: true
+  details: "sync_metrics.py syncs profile data + Stripe into local DB. Follower growth = primary signal."
+
+typefully:
+  decision: "Typefully was never used for actual posting. 1,184 posts came from browser poster."
+  date: "2026-03-18"
+  context: "Typefully API key works but analytics API does not exist. Not useful for our needs."
+  resolved: true
+
+reply_engine:
+  decision: "Reply Engine v2.0 is live with GPT-4o-mini contextual replies"
+  date: "2026-03-18"
+  context: "Replaced 12 static templates with GPT-4o-mini. 5 tones auto-rotated. Dry run: 5/5 success."
+  resolved: true
+  details: "Uses Tavily for tweet discovery, browser poster for reply delivery."
+
+humanizer:
+  decision: "Humanizer v2.0 is live with 30 AI pattern categories and 5 voice profiles"
+  date: "2026-03-18"
+  context: "Complete rewrite of humanize.py. Research-backed 5-stage pipeline."
+  resolved: true
+
+product_playbook:
+  decision: "AI Swarm Playbook exists and is listed on Gumroad at $19"
+  date: "2026-03-18"
+  context: "9 chapters, 38K+ words. PDF generated via HTML+CSS → Chrome headless print."
+  resolved: true
+  details: "Gumroad listing created with cover art and preview images."
+
+store_platform:
+  decision: "LemonSqueezy is primary store, Gumroad as backup"
+  date: "2026-03-17"
+  context: "LemonSqueezy: 5% fee vs Gumroad: 10%. LemonSqueezy pending identity verification."
+  partially_resolved: true
+  blocker: "Identity verification (SSN + photo ID) still in progress"
+
+self_learning:
+  decision: "Self-learning loop pulls real follower data before analysis"
+  date: "2026-03-18"
+  context: "sync_metrics.py runs before self_learn.py to ensure real data."
+  resolved: true
+
+scheduler:
+  decision: "Full daily schedule is wired and running"
+  date: "2026-03-18"
+  context: "Reply engagement added at 10:30 AM, 3:00 PM, 8:00 PM. All other jobs intact."
+  resolved: true
+
+reply_schedule:
+  decision: "3 reply sessions per day — 10:30 AM, 3:00 PM, 8:00 PM"
+  date: "2026-03-18"
+  context: "~10 replies per session to tiered accounts (Tier 1: 100K+, Tier 2: 10K-100K, Tier 3: 1K-10K)"
+  resolved: true
+
+strategy:
+  decision: "Free first, audience before revenue, 3-phase launch"
+  date: "2026-03-18"
+  context: "Phase 1: Free guide (weeks 1-4). Phase 2: Premium $29-49 at 500+ followers. Phase 3: Stack revenue."
+  resolved: true
+  source: "strategy-learnings.yaml"
+
+# === New decisions from codebase review (2026-03-19) ===
+
+posting_priority_enforced:
+  decision: "twitter.py now tries Browser first, Typefully second — code matches decision"
+  date: "2026-03-19"
+  context: "Previously, code tried Typefully first despite browser-first decision. Fixed posting order in post_tweet() and post_thread()."
+  resolved: true
+
+research_pipeline_wired:
+  decision: "Research output now feeds the posting pipeline via tweet_cache.json"
+  date: "2026-03-19"
+  context: "run_research() calls research_to_tweet_ideas() and caches results. _pick_unique() checks cache before static pool."
+  resolved: true
+  details: "Cache at output/research/tweet_cache.json. Static 20-tweet pool is now fallback, not primary."
+
+humanizer_never_drops:
+  decision: "publish() never returns None — posts with warning instead of silently dropping"
+  date: "2026-03-19"
+  context: "3/13 posts were silently dropped on Day 2 because humanization failed. Now publishes anyway with ⚠️ HUMANIZATION_WEAK warning."
+  resolved: true
+
+tweepy_import_guarded:
+  decision: "tweepy import is wrapped in try/except — module loads without tweepy installed"
+  date: "2026-03-19"
+  context: "Prevents import cascade crashes when tweepy isn't installed or API keys are missing."
+  resolved: true
+
+agent_py_deprecated:
+  decision: "agent.py is marked DEPRECATED — scheduler calls modules directly"
+  date: "2026-03-19"
+  context: "Was dead code with TODO stubs. Kept for reference but clearly marked as unused."
+  resolved: true

@@ -1,0 +1,62 @@
+# Strategy Learnings — Auto-updated from real decisions
+# These override default agent behavior
+
+RULE_ZERO:
+  rule: "NEVER let the owner ship something that would embarrass the brand."
+  detail: "If content is thin, product isn't worth the price, or strategy is wrong — SAY SO IMMEDIATELY. Don't wait to be asked. Don't be a yes-man. Push back BEFORE it goes live, not after."
+  trigger: "Before ANY product listing, tweet, or public-facing content ships"
+  check: "Would I pay for this? Would I share this? Would I be embarrassed if a competitor saw it?"
+
+learned_2026_03_18:
+  
+  product_strategy:
+    lesson: "Don't sell to an audience of zero. Build trust first, monetize second."
+    rule: "First product is ALWAYS free. It's a lead magnet, not revenue."
+    mistake_made: "Tried to sell a $9 PDF with no followers. Nobody buys from strangers."
+    correction: "Free guide → email list → warm audience → premium product ($29-49)"
+    source: "Value-first strategy — give away so much free value people feel grateful and want more"
+  
+  content_quality:
+    lesson: "A pretty wrapper doesn't fix thin content."
+    rule: "Every product must pass the 'would I pay for this?' test before listing."
+    mistake_made: "Generated a nice-looking PDF with surface-level content worth $0."
+    correction: "Content must have specific, actionable value you can't get from a tweet thread."
+    minimum_bar:
+      - "30+ ready-to-use prompts (not generic [TOPIC] placeholders)"
+      - "Step-by-step walkthroughs, not tool descriptions"
+      - "Real templates/workflows they can import and use immediately"
+      - "Content they'd screenshot and share with friends"
+  
+  pricing:
+    lesson: "Price is a signal. Free = reach. Paid = must deliver 10x the price in value."
+    rule: "Free products build audience. Paid products ($29+) come after trust is built."
+    mistake_made: "Priced at $9 — too cheap to signal quality, too expensive for no-audience reach."
+    correction: "Free lead magnet now. Premium $29-49 product at 500+ followers."
+  
+  copy_and_voice:
+    lesson: "Beginner-friendly copy converts best — research confirmed."
+    rule: "Write at 7th grade reading level. Direct, clear, no jargon. Friendly/helpful energy."
+    mistake_made: "Initially used some tech jargon that would alienate beginners."
+    correction: "Plain language always. If a 12-year-old can't understand it, rewrite it."
+    banned_words:
+      - "leverage"
+      - "utilize" 
+      - "optimize"
+      - "scalable"
+      - "ecosystem"
+      - "API"
+      - "SDK"
+      - "deploy"
+      - "pipeline" # say "system" or "steps" instead
+
+  launch_sequence:
+    phase_1: "FREE guide → email capture → build 500+ followers (weeks 1-4)"
+    phase_2: "Premium product → sell to warm audience (weeks 4-6)"
+    phase_3: "Stack revenue: products + affiliates + sponsors (month 2-3)"
+    rule: "Never skip phases. Audience before revenue."
+
+  design:
+    lesson: "Use HTML+CSS → Chrome PDF, not reportlab. reportlab makes ugly documents."
+    rule: "All PDFs generated via designed HTML converted with Chrome headless print."
+    mistake_made: "reportlab PDF looked like a Word doc. Not worth paying for."
+    correction: "Dark theme, Inter font, cards, badges, gradients — designed ebook feel."

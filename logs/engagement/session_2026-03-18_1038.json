@@ -1,0 +1,17 @@
+{
+  "started": "2026-03-18T10:30:23.853757",
+  "replies_attempted": 7,
+  "replies_posted": 0,
+  "replies_failed": 7,
+  "accounts_engaged": [],
+  "errors": [
+    "@therundownai: 402 Payment Required\nYour enrolled account [2034104044961124352] does not have any credits to fulfill this request.",
+    "@danshipper: 402 Payment Required\nYour enrolled account [2034104044961124352] does not have any credits to fulfill this request.",
+    "@aiaborobotics: 402 Payment Required\nYour enrolled account [2034104044961124352] does not have any credits to fulfill this request.",
+    "@jaaboroschmid: 402 Payment Required\nYour enrolled account [2034104044961124352] does not have any credits to fulfill this request.",
+    "@buildspace: 402 Payment Required\nYour enrolled account [2034104044961124352] does not have any credits to fulfill this request.",
+    "@indiehackers: 402 Payment Required\nYour enrolled account [2034104044961124352] does not have any credits to fulfill this request.",
+    "@solopreneurship: 402 Payment Required\nYour enrolled account [2034104044961124352] does not have any credits to fulfill this request."
+  ],
+  "finished": "2026-03-18T10:38:48.752479"
+}

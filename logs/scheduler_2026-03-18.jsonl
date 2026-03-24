@@ -1,0 +1,18 @@
+{"timestamp": "2026-03-18T08:13:17.748081", "type": "scheduler", "event": "swarm_started", "job_name": "main", "details": "14 jobs loaded"}
+{"timestamp": "2026-03-18T08:13:23.545322", "type": "scheduler", "event": "swarm_started", "job_name": "main", "details": "14 jobs loaded"}
+{"timestamp": "2026-03-18T08:13:23.545579", "type": "scheduler", "event": "job_start", "job_name": "metrics_sync", "details": ""}
+{"timestamp": "2026-03-18T08:17:33.936991", "type": "scheduler", "event": "job_start", "job_name": "reply_engagement", "details": ""}
+{"timestamp": "2026-03-18T08:19:18.473506", "type": "scheduler", "event": "job_start", "job_name": "reply_engagement", "details": ""}
+{"timestamp": "2026-03-18T08:19:47.877711", "type": "scheduler", "event": "swarm_started", "job_name": "main", "details": "14 jobs loaded"}
+{"timestamp": "2026-03-18T08:19:47.877998", "type": "scheduler", "event": "job_start", "job_name": "metrics_sync", "details": ""}
+{"timestamp": "2026-03-18T10:19:52.481750", "type": "scheduler", "event": "job_start", "job_name": "engagement", "details": ""}
+{"timestamp": "2026-03-18T10:30:23.853224", "type": "scheduler", "event": "job_start", "job_name": "reply_engagement", "details": ""}
+{"timestamp": "2026-03-18T10:30:23.853528", "type": "scheduler", "event": "job_start", "job_name": "reply_engagement", "details": ""}
+{"timestamp": "2026-03-18T11:01:29.529419", "type": "scheduler", "event": "job_start", "job_name": "reply_engagement", "details": ""}
+{"timestamp": "2026-03-18T12:00:19.733917", "type": "scheduler", "event": "job_start", "job_name": "posting", "details": "type=video"}
+{"timestamp": "2026-03-18T12:20:20.027166", "type": "scheduler", "event": "job_start", "job_name": "engagement", "details": ""}
+{"timestamp": "2026-03-18T14:00:59.268592", "type": "scheduler", "event": "job_start", "job_name": "posting", "details": "type=thread"}
+{"timestamp": "2026-03-18T14:01:00.144930", "type": "scheduler", "event": "job_start", "job_name": "product_promo", "details": ""}
+{"timestamp": "2026-03-18T14:21:24.094657", "type": "scheduler", "event": "job_start", "job_name": "engagement", "details": ""}
+{"timestamp": "2026-03-18T15:02:57.173128", "type": "scheduler", "event": "job_start", "job_name": "reply_engagement", "details": ""}
+{"timestamp": "2026-03-18T15:02:57.174127", "type": "scheduler", "event": "job_start", "job_name": "reply_engagement", "details": ""}

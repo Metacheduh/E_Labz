@@ -1,0 +1,78 @@
+# === Active Pipeline (orchestrator/) ===
+# These are the modules that actually run. No external agent repos.
+
+pipeline:
+  scheduler:
+    file: "orchestrator/scheduler.py"
+    enabled: true
+    posts_per_day: 3
+    max_thread_length: 8
+
+  humanizer:
+    file: "orchestrator/humanize.py"
+    enabled: true
+    max_ai_detection_score: 0.05
+    aggressiveness: 0.9
+    default_voice: "friendly"
+
+  reply_engine:
+    file: "orchestrator/reply_engine.py"
+    enabled: true
+    max_replies_per_hour: 5
+    model: "gpt-4o-mini"
+    tones: ["casual", "insightful", "curious", "helpful", "supportive"]
+
+  browser_poster:
+    file: "orchestrator/browser_poster.py"
+    enabled: true
+    method: "playwright"
+    note: "Twitter API returns 402 on writes — browser is the only path"
+
+  research:
+    file: "orchestrator/research.py"
+    enabled: true
+    provider: "tavily"
+    max_results: 10
+
+  metrics:
+    file: "orchestrator/metrics.py"
+    enabled: true
+    storage: "sqlite"
+    retention_days: 90
+
+  sync_metrics:
+    file: "orchestrator/sync_metrics.py"
+    enabled: true
+    twitter: true
+    store_platform: "gumroad"
+
+  self_learning:
+    file: "orchestrator/self_learn.py"
+    enabled: true
+
+  store:
+    file: "orchestrator/store.py"
+    enabled: true
+    platform: "gumroad"
+
+# === System ===
+system:
+  newsletter:
+    enabled: true
+    recipient: "hernandezeslyn@gmail.com"
+    time: "23:45"
+    style: "friendly"
+
+orchestrator:
+  swarm_enabled: true
+  kill_switch: false
+  log_level: "INFO"
+
+# === Archived (not active, preserved in archive/) ===
+# The following were cloned from GitHub but are not imported by the pipeline:
+#   - agents/researcher  (gpt-researcher)    → replaced by research.py + Tavily
+#   - agents/twitter     (dot-automation)    → replaced by browser_poster.py
+#   - agents/growth      (xgrow)             → replaced by reply_engine.py
+#   - agents/video       (faceless-video-gen) → not yet wired
+#   - agents/product     (ebook-generator)    → not yet wired
+# To restore: mv archive/agents_cloned_repos/<name> agents/<name>

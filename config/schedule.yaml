@@ -1,0 +1,68 @@
+daily:
+  research:
+    time: "09:00"
+    timezone: "US/Eastern"
+    agents: ["gpt_researcher", "brave_search_agent", "marvin_agent"]
+
+  video_generation:
+    - time: "10:00"
+      type: "primary_video"
+    - time: "16:00"
+      type: "secondary_video"
+
+  humanization:
+    time: "11:00"
+    agent: "human_voice_engine"
+    stages: ["detox", "personality", "chaos", "voice_lock", "verify"]
+    max_ai_score: 0.05
+
+  posting:
+    - time: "12:00"
+      type: "video"
+      source: "primary_video"
+    - time: "14:00"
+      type: "thread"
+      source: "research_data"
+    - time: "18:00"
+      type: "video"
+      source: "secondary_video"
+
+  engagement:
+    frequency_hours: 2
+    start_time: "09:00"
+    end_time: "22:00"
+    max_replies_per_session: 5
+    agents: ["growth_agent", "beeai_agent"]
+
+  self_learning:
+    time: "23:30"
+    agents: ["self_learning", "mindsdb_agent", "langgraph_agent"]
+    actions: ["collect_metrics", "analyze", "micro_adjust", "save_report"]
+
+  newsletter:
+    time: "23:45"
+    recipient: "hernandezeslyn@gmail.com"
+    style: "friendly"
+    agents: ["self_learning", "slack_agent"]
+
+  notifications:
+    time: "23:50"
+    agent: "slack_agent"
+    type: "daily_summary"
+
+weekly:
+  product_creation:
+    day: "monday"
+    time: "10:00"
+    agents: ["product_agent", "llamaindex_agent", "notion_agent"]
+
+  deep_review:
+    day: "sunday"
+    time: "00:00"
+    agents: ["self_learning", "mindsdb_agent", "langgraph_agent", "slack_agent"]
+    actions: ["macro_adjust", "strategy_shift", "voice_calibration"]
+
+  product_promotion:
+    day: "wednesday"
+    time: "14:00"
+    type: "product_promo_thread"
