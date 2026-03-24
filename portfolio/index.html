@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Labz | AI Products Shipped in Weeks, Not Months</title>
+<meta name="description" content="We build production-grade AI dashboards, agents, and SaaS apps. 20+ AI agents. 16 apps shipped. Your project could be next.">
+<meta property="og:title" content="E-Labz | AI Products & Agents">
+<meta property="og:description" content="20+ production AI agents. 16 apps shipped. Custom AI dashboards, agent swarms, and SaaS MVPs.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Aurora Background -->
+<div id="aurora">
+  <div class="aurora-orb"></div>
+  <div class="aurora-orb"></div>
+  <div class="aurora-orb"></div>
+  <div class="aurora-orb"></div>
+</div>
+<canvas id="particles"></canvas>
+
+<!-- Nav -->
+<nav class="nav" id="nav">
+  <a href="#hero" class="nav-logo">⚡ E-Labz</a>
+  <div class="nav-links">
+    <a href="#swarm">Swarm</a>
+    <a href="#projects">Work</a>
+    <a href="#agents">Agents</a>
+    <a href="#marketplace">Store</a>
+    <a href="#services">Services</a>
+    <a href="#contact" class="nav-cta">Book a Call</a>
+  </div>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-bg-img"></div>
+  <div class="hero-badge">🔥 Only 2 Build Slots Left for Q2 &bull; 16 Apps Shipped &bull; Booking Now</div>
+  <h1>
+    <span class="line">Your Competitors Are Shipping AI.</span>
+    <span class="line"><span class="gradient-text">Are You?</span></span>
+  </h1>
+  <p class="hero-sub">Every week you wait, someone else launches the product you're still planning. We build production-grade AI dashboards, agent swarms, and SaaS MVPs — deployed in 2-4 weeks, not 6 months.</p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn btn-primary">Claim Your Build Slot →</a>
+    <a href="#projects" class="btn btn-ghost">See What We Shipped This Month →</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num" data-count="20">0</span><span class="stat-label">AI Agents Built</span></div>
+    <div class="stat"><span class="stat-num" data-count="16">0</span><span class="stat-label">Apps Shipped</span></div>
+    <div class="stat"><span class="stat-num" data-count="101">0</span><span class="stat-label">Tests Passing</span></div>
+    <div class="stat"><span class="stat-num" data-count="4">0</span><span class="stat-label">Week Delivery</span></div>
+  </div>
+</section>
+
+<!-- Live Swarm Status -->
+<section class="section" id="swarm">
+  <div class="section-visual"><img src="img/swarm.png" alt="AI Swarm Network" class="section-img"></div>
+  <h2 class="section-title">This Is Running Right Now. Yours Could Be Next.</h2>
+  <p class="section-sub">Our autonomous AI swarm operates 24/7 — generating content, posting, learning, and selling while we sleep. We build these for clients too.</p>
+  <div class="swarm-grid">
+    <div class="swarm-card active"><div class="swarm-dot"></div><h3>🔍 Research Agent</h3><p>Scanning trending AI topics via Tavily + Brave</p><span class="swarm-status">● Active</span></div>
+    <div class="swarm-card active"><div class="swarm-dot"></div><h3>✍️ Content Agent</h3><p>Generating Jay Shetty-style AI content</p><span class="swarm-status">● Active</span></div>
+    <div class="swarm-card active"><div class="swarm-dot"></div><h3>🛡️ Human Voice Engine</h3><p>5-stage pipeline — &lt;5% AI detection</p><span class="swarm-status">● Active</span></div>
+    <div class="swarm-card active"><div class="swarm-dot"></div><h3>📱 Twitter Agent</h3><p>Posting via Typefully to @AutoStackHQ</p><span class="swarm-status">● Active</span></div>
+    <div class="swarm-card idle"><div class="swarm-dot"></div><h3>🧠 Self-Learning Agent</h3><p>Nightly analysis & micro-adjustments</p><span class="swarm-status">○ Scheduled</span></div>
+    <div class="swarm-card idle"><div class="swarm-dot"></div><h3>💰 Product Agent</h3><p>Digital product creation & store sync</p><span class="swarm-status">○ Scheduled</span></div>
+  </div>
+</section>
+
+<!-- Projects — Bento Grid -->
+<section class="section" id="projects">
+  <h2 class="section-title">Shipped This Year. Running in Production Now.</h2>
+  <p class="section-sub">Not mockups. Not demos. These are live, revenue-generating products we built for real clients — most delivered in under 4 weeks.</p>
+  <div class="projects-grid">
+    <div class="project-card featured">
+      <div class="project-badge">🆕 Latest</div>
+      <img src="img/rap-battle.png" alt="AI Rap Battle Arena" class="project-img">
+      <h3>🎤 AI Rap Battle Arena</h3>
+      <p>Real-time AI vs AI rap battles with crowd voting, dynamic beat sync, and multi-agent orchestration. Built with Google ADK + Gemini.</p>
+      <div class="project-tech"><span>Google ADK</span><span>Gemini</span><span>Three.js</span><span>WebSocket</span></div>
+    </div>
+    <div class="project-card"><h3>📊 CFP Mastery</h3><p>AI study platform with 1000+ questions and adaptive learning.</p><div class="project-tech"><span>React</span><span>Firebase</span></div></div>
+    <div class="project-card"><h3>⚖️ StrykePt</h3><p>Legal AI agent for autonomous document analysis & filings.</p><div class="project-tech"><span>Swift</span><span>Firebase</span></div></div>
+    <div class="project-card"><h3>🤖 AI Content Swarm</h3><p>6-agent autonomous system running 24/7. Research → Post → Learn.</p><div class="project-tech"><span>Genkit</span><span>Python</span></div></div>
+    <div class="project-card"><h3>🔬 Deep Research</h3><p>Multi-agent research with LangGraph & PDF report generation.</p><div class="project-tech"><span>LangGraph</span><span>Next.js</span></div></div>
+    <div class="project-card"><h3>🏠 Real Estate AI</h3><p>Property valuation with AI market analysis & investment scoring.</p><div class="project-tech"><span>React</span><span>Gemini</span></div></div>
+    <div class="project-card"><h3>📈 SEO Audit Agent</h3><p>5 parallel AI agents crawl, audit & generate SEO reports.</p><div class="project-tech"><span>Multi-Agent</span><span>PDF</span></div></div>
+    <div class="project-card"><h3>💼 Invoice Bot</h3><p>Automated invoice tracking, follow-ups & escalation via n8n.</p><div class="project-tech"><span>n8n</span><span>Email</span></div></div>
+  </div>
+  <div class="cta-row"><a href="#contact" class="btn btn-primary">Your Product Could Be Here in 4 Weeks →</a></div>
+</section>
+
+<!-- AI Agents Showcase -->
+<section class="section section-dark" id="agents">
+  <div class="section-visual"><img src="img/agents.png" alt="AI Agent Network" class="section-img"></div>
+  <h2 class="section-title">20+ Agents Ready to Deploy Today</h2>
+  <p class="section-sub">Why build from scratch when these are production-tested and ready? License one, customize it, or let us drop it into your stack this week.</p>
+  <div class="agents-grid">
+    <div class="agent-pill">🔍 Research Agent</div>
+    <div class="agent-pill">✍️ Content Writer</div>
+    <div class="agent-pill">🛡️ Humanizer</div>
+    <div class="agent-pill">📱 Twitter Poster</div>
+    <div class="agent-pill">💬 Reply Engine</div>
+    <div class="agent-pill">🧠 Self-Learning</div>
+    <div class="agent-pill">💰 Product Creator</div>
+    <div class="agent-pill">📊 Analytics Agent</div>
+    <div class="agent-pill">📈 SEO Auditor</div>
+    <div class="agent-pill">🎤 Rap Battle MC</div>
+    <div class="agent-pill">⚖️ Legal Filing Agent</div>
+    <div class="agent-pill">📚 Study Tutor</div>
+    <div class="agent-pill">🏠 Property Valuator</div>
+    <div class="agent-pill">🔄 Content Repurposer</div>
+    <div class="agent-pill">📧 Email Campaign</div>
+    <div class="agent-pill">🤖 Chatbot Builder</div>
+    <div class="agent-pill">📝 Invoice Tracker</div>
+    <div class="agent-pill">🎯 Growth Strategist</div>
+    <div class="agent-pill">🔗 API Orchestrator</div>
+    <div class="agent-pill">📋 Document Analyzer</div>
+  </div>
+</section>
+
+<!-- Marketplace -->
+<section class="section" id="marketplace">
+  <h2 class="section-title">Stop Paying Developers by the Hour</h2>
+  <p class="section-sub">Grab a production-ready kit, deploy in 5 minutes, and start saving 10+ hours a week. These are the exact tools we use internally.</p>
+  <div class="market-tabs">
+    <button class="tab active" onclick="showTab('agents-tab')">🤖 Agents</button>
+    <button class="tab" onclick="showTab('workflows-tab')">⚙️ Workflows</button>
+    <button class="tab" onclick="showTab('prompts-tab')">💬 Prompts</button>
+    <button class="tab" onclick="showTab('templates-tab')">📄 Templates</button>
+  </div>
+  <div class="tab-content" id="agents-tab">
+    <div class="store-grid">
+      <div class="store-card featured-product"><img src="img/faceless-empire.png" alt="The Faceless Empire" class="store-card-img"><h3>👑 The Faceless Empire</h3><p>Build a revenue-generating AI content business without showing your face. Full system blueprint.</p><ul><li>✓ Revenue model framework</li><li>✓ Agent swarm architecture</li><li>✓ Monetization playbook</li></ul><a href="https://aut0stack.gumroad.com" class="btn btn-sm btn-primary">Get It → $39</a></div>
+      <div class="store-card featured-product"><img src="img/playbook.png" alt="AI Swarm Playbook" class="store-card-img"><h3>📕 The AI Swarm Playbook</h3><p>The complete guide to building autonomous AI agent swarms. 6-agent framework, orchestration patterns.</p><ul><li>✓ Full playbook (PDF)</li><li>✓ Architecture diagrams</li><li>✓ Code examples</li></ul><a href="https://aut0stack.gumroad.com/l/rlqaed" class="btn btn-sm btn-primary">Get It → $19</a></div>
+      <div class="store-card"><img src="img/automation-playbook.png" alt="AI Automation Playbook" class="store-card-img"><h3>⚡ AI Automation Playbook</h3><p>40+ automation recipes, prompt templates, and tool configs. Copy, paste, deploy.</p><ul><li>✓ 40+ ready-to-use recipes</li><li>✓ Prompt library</li><li>✓ Tool stack guides</li></ul><a href="https://aut0stack.gumroad.com" class="btn btn-sm">Get It → $29</a></div>
+      <div class="store-card"><img src="img/swarm-guide.png" alt="AI Swarm User Guide" class="store-card-img"><h3>📗 AI Swarm — User Guide</h3><p>From startup to income. Step-by-step guide to running your autonomous content swarm with Genkit + ADK.</p><ul><li>✓ Setup walkthrough</li><li>✓ Agent config guides</li><li>✓ Revenue strategies</li></ul><a href="https://aut0stack.gumroad.com" class="btn btn-sm">Get It → $29</a></div>
+      <div class="store-card"><img src="img/chatbot.png" alt="AI Chatbot Kit" class="store-card-img"><h3>🤖 AI Chatbot Kit</h3><p>Drop-in chatbot with customizable personality & knowledge base.</p><ul><li>✓ Full source code</li><li>✓ 1-click deploy</li><li>✓ API guide</li></ul><a href="https://aut0stack.gumroad.com" class="btn btn-sm">Get It → $29</a></div>
+      <div class="store-card"><img src="img/seo.png" alt="SEO Audit Agent" class="store-card-img"><h3>📈 SEO Audit Agent</h3><p>5 parallel agents crawl & audit your site from every angle.</p><ul><li>✓ PDF reports</li><li>✓ Google Search API</li><li>✓ Batch mode</li></ul><a href="https://aut0stack.gumroad.com" class="btn btn-sm">Get It → $49</a></div>
+      <div class="store-card"><h3>🔄 Content Repurposer</h3><p>Transform one piece of content into threads, posts, and newsletters.</p><ul><li>✓ Multi-format</li><li>✓ Brand tone</li><li>✓ Batch processing</li></ul><a href="https://aut0stack.gumroad.com" class="btn btn-sm">Get It → $19</a></div>
+      <div class="store-card"><h3>📝 Invoice Follow-Up</h3><p>n8n workflow for automatic invoice tracking & escalation.</p><ul><li>✓ n8n template</li><li>✓ Email templates</li><li>✓ Escalation rules</li></ul><a href="https://aut0stack.gumroad.com" class="btn btn-sm">Get It → $19</a></div>
+    </div>
+  </div>
+  <div class="tab-content hidden" id="workflows-tab">
+    <div class="store-grid">
+      <div class="store-card"><h3>⚙️ Content Pipeline</h3><p>Research → Draft → Humanize → Post. Full automation workflow.</p><ul><li>✓ 6-agent pipeline</li><li>✓ Scheduler config</li><li>✓ Slack integration</li></ul><a href="https://aut0stack.gumroad.com" class="btn btn-sm">Get It → $39</a></div>
+      <div class="store-card"><h3>⚙️ Lead Gen Workflow</h3><p>Auto-find, qualify, and reach leads with AI-powered outreach.</p><ul><li>✓ Multi-channel</li><li>✓ CRM sync</li><li>✓ Templates</li></ul><a href="https://aut0stack.gumroad.com" class="btn btn-sm">Get It → $49</a></div>
+    </div>
+  </div>
+  <div class="tab-content hidden" id="prompts-tab">
+    <div class="store-grid">
+      <div class="store-card"><h3>💬 Jay Shetty Voice Pack</h3><p>System prompts for wisdom-driven, story-first AI content.</p><ul><li>✓ 10 prompt templates</li><li>✓ Voice DNA guide</li><li>✓ Examples included</li></ul><a href="https://aut0stack.gumroad.com" class="btn btn-sm">Get It → $9</a></div>
+      <div class="store-card"><h3>💬 Anti-AI Detection Pack</h3><p>30-category humanization system. Under 5% AI detection.</p><ul><li>✓ Banned word lists</li><li>✓ Voice profiles</li><li>✓ Chaos engine</li></ul><a href="https://aut0stack.gumroad.com" class="btn btn-sm">Get It → $19</a></div>
+    </div>
+  </div>
+  <div class="tab-content hidden" id="templates-tab">
+    <div class="store-grid">
+      <div class="store-card"><h3>📄 SaaS Starter Kit</h3><p>Auth, billing, AI features, cloud infra. Launch-ready.</p><ul><li>✓ Firebase + Stripe</li><li>✓ Dashboard UI</li><li>✓ AI integration</li></ul><a href="https://aut0stack.gumroad.com" class="btn btn-sm">Get It → $79</a></div>
+      <div class="store-card"><h3>📄 AI Dashboard Template</h3><p>Real-time analytics dashboard with AI-powered insights.</p><ul><li>✓ Chart.js + D3</li><li>✓ Dark mode</li><li>✓ Mobile ready</li></ul><a href="https://aut0stack.gumroad.com" class="btn btn-sm">Get It → $39</a></div>
+      <div class="store-card"><h3>🚀 Gumroad Launch Kit</h3><p>Complete launch strategy for digital products. Pricing, positioning, and launch checklist.</p><ul><li>✓ Launch checklist</li><li>✓ Pricing framework</li><li>✓ Sales page template</li></ul><a href="https://aut0stack.gumroad.com" class="btn btn-sm">Get It → $19</a></div>
+      <div class="store-card"><h3>📊 Marketing & SEO Playbook</h3><p>Drive organic traffic to your digital products. Keyword strategy, content plan, and growth hacks.</p><ul><li>✓ SEO strategy</li><li>✓ Content calendar</li><li>✓ Analytics setup</li></ul><a href="https://aut0stack.gumroad.com" class="btn btn-sm">Get It → $19</a></div>
+    </div>
+  </div>
+  <div class="cta-row"><a href="https://aut0stack.gumroad.com" class="btn btn-ghost">Browse All Products on Gumroad →</a></div>
+</section>
+
+<!-- Services -->
+<section class="section section-dark" id="services">
+  <div class="section-visual"><img src="img/dashboard.png" alt="AI Dashboard" class="section-img"></div>
+  <h2 class="section-title">Every Week You Delay Costs You Customers</h2>
+  <p class="section-sub">Your competitors are already shipping AI. Pick your build. We start this week.</p>
+  <div class="services-grid">
+    <div class="service-card"><div class="service-icon">📊</div><h3>AI Dashboard MVPs</h3><p>From "we have data" to "live dashboard with AI insights" — delivered in 2 weeks, not 2 months.</p><span class="price">From $2,500</span></div>
+    <div class="service-card"><div class="service-icon">🤖</div><h3>AI Agent Integration</h3><p>Your team wastes 20+ hrs/week on tasks AI agents handle in seconds. Let's fix that.</p><span class="price">From $3,500</span></div>
+    <div class="service-card"><div class="service-icon">⚙️</div><h3>Automation Pipelines</h3><p>If a human is copy-pasting data between tools — that's money burning. We automate it in days.</p><span class="price">From $1,500</span></div>
+    <div class="service-card"><div class="service-icon">🚀</div><h3>Full SaaS MVP</h3><p>Auth, billing, AI features, cloud infra — launch-ready in 3-4 weeks. While your competitor is still hiring.</p><span class="price">From $5,000</span></div>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="section" id="process">
+  <h2 class="section-title">From Call to Deployed Product in 4 Steps</h2>
+  <div class="process-grid">
+    <div class="process-step"><div class="step-num">01</div><h3>15-Min Strategy Call</h3><p>Today. You describe the problem. We scope it live, give you a fixed quote, and lock in your build slot.</p></div>
+    <div class="process-step"><div class="step-num">02</div><h3>Blueprint in 48hrs</h3><p>Wireframes, tech stack, milestones — delivered within 2 days. You approve before we write a line of code.</p></div>
+    <div class="process-step"><div class="step-num">03</div><h3>Weekly Demo Builds</h3><p>You see working software every week. No disappearing acts. No surprises. Ship with confidence.</p></div>
+    <div class="process-step"><div class="step-num">04</div><h3>Live in 2-4 Weeks</h3><p>Deployed to production. All code handed over. 30 days free support. You're live while others are still planning.</p></div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="section section-dark" id="about">
+  <div class="about-content">
+    <h2>I've Shipped 16 AI Products in 12 Months. Yours Could Be #17.</h2>
+    <p>I'm not a consultant who sends you a PDF. I'm a full-stack AI developer who writes the code, deploys the infrastructure, and ships products that generate real revenue. Dashboards with real insights. Agents that automate real workflows. SaaS apps with real users paying real money.</p>
+    <p>My stack spans <strong>Python, TypeScript, React, Google ADK, Gemini, Genkit, Firebase, LangGraph</strong>, and <strong>Three.js</strong>. I build fast, test thoroughly (101+ tests on one project alone), and deploy on battle-tested infrastructure. The only question is — <strong>are you ready to ship?</strong></p>
+    <div class="tech-stack">
+      <span>Python</span><span>TypeScript</span><span>React</span><span>Next.js</span><span>Google ADK</span><span>Gemini</span><span>Genkit</span><span>Firebase</span><span>LangGraph</span><span>Three.js</span><span>n8n</span><span>Stripe</span>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="section" id="contact">
+  <h2 class="section-title">Only 2 Build Slots Left This Quarter</h2>
+  <p class="section-sub">We take on 3-4 projects at a time to guarantee quality. Two slots are already claimed. Book your free 15-minute strategy call before they're gone.</p>
+  <div class="contact-actions">
+    <a href="mailto:hello@e-labz.com" class="btn btn-primary btn-lg">Claim Your Slot → hello@e-labz.com</a>
+    <a href="https://aut0stack.gumroad.com" class="btn btn-ghost btn-lg">🛒 Or Grab a Kit & Start Now</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <span>⚡ E-Labz — AI products shipped in weeks, not months.</span>
+    <div class="footer-links">
+      <a href="#projects">Work</a><a href="#agents">Agents</a><a href="#marketplace">Store</a><a href="#services">Services</a><a href="#contact">Contact</a>
+    </div>
+    <span class="footer-copy">© 2026 E-Labz. All rights reserved.</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
