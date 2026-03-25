@@ -91,65 +91,64 @@ def check_kill_switch() -> bool:
 
 
 # ============================================================
-# TWEET CONTENT LIBRARY (Autostack HQ — friendly, helpful, sharing discoveries)
+# TWEET CONTENT LIBRARY — @exm7777-inspired: builder authority, proof-based
+# Format: punchy hook → arrow list → result/CTA
 # ============================================================
 
 VALUE_TWEETS = [
-    "I used to pay for 10 AI tools. Turns out I only needed 5. Saved $430/month.",
-    "Found an AI stack that does what $500/month in subscriptions did. Total cost: $70. Happy to share.",
-    "n8n replaced Zapier, Make, and IFTTT for me. Free to self-host. Honestly kind of changed everything.",
-    "Been using Perplexity Pro instead of Google for research. Sourced answers, no SEO spam. Way better.",
-    "Cursor is wild. It doesn't just autocomplete — it understands your whole codebase. Been using it daily.",
-    "ElevenLabs helped me go from 1 video/week to 1 video/day. The voices are surprisingly natural.",
-    "Honestly? Claude surprised me for writing and analysis. Been reaching for it over ChatGPT lately.",
-    "The gap between 'AI curious' and 'AI profitable' is really just 5 tools and about 30 days of focused work.",
-    "Set up a content engine over a weekend. Research, generate, post, engage. All runs on its own now.",
-    "3 automations every creator should have running: content scheduling, lead capture, and analytics. All free to set up.",
-    "One automation saves me about 2 hours every day. Took 10 minutes to set up. No code needed.",
-    "Everyone asks which AI tool is best. Better question: which 5 tools actually work together?",
-    "I track every dollar AI saves me. Last month: ~$2,340 in time value. Tool cost: $70.",
-    "Started building instead of watching tutorials. Learned more in 1 hour of doing than 10 hours of watching.",
-    "The difference between an AI hobby and an AI business is honestly just automations.",
-    "Your $50/month Zapier bill is optional. n8n does the same thing for free if you self-host.",
-    "Tried 47 AI tools in the past 6 months. Most are noise. A few are genuinely amazing.",
-    "Set up AI automations that run while I sleep. Still kind of wild to wake up to results.",
-    "If you're spending more than 30 min/day on repetitive tasks, there's probably an AI tool for that.",
-    "The tools are all out there. The real skill is knowing which ones to stack together.",
+    # How-To format
+    "how I post 4x/day without touching Twitter:\n→ Brave Search (research)\n→ GPT-4 (write)\n→ Voice Engine (humanize)\n→ Typefully API (schedule)\nzero manual input.",
+    "how I cut content creation from 4 hours to 12 minutes:\n→ automated research\n→ automated writing\n→ automated posting\n→ automated engagement\nthe swarm handles it all.",
+    "how to build your first AI agent pipeline:\n→ pick one repetitive task\n→ chain 3 APIs together\n→ add a scheduler\n→ deploy to Cloud Run\nthat's it. no framework needed.",
+    "how I track revenue without logging into dashboards:\n→ Lemon Squeezy API (sales)\n→ Twitter API (engagement)\n→ SQLite (local cache)\n→ daily sync at 8AM\nall automated.",
+    "how I automated lead capture:\n→ portfolio site with email form\n→ free guide as lead magnet\n→ welcome email via SMTP\n→ product link in follow-up\ncost: $0/month.",
+    # Stack Reveal format
+    "the stack running @AutoStackHQ 24/7:\n→ Cloud Run (always on)\n→ GPT-4 (content)\n→ Brave Search (research)\n→ Typefully (posting)\n→ Lemon Squeezy (revenue)\n9 agents. zero downtime.",
+    "my $70/month AI stack:\n→ GPT-4 ($20)\n→ Perplexity Pro ($20)\n→ Cursor ($20)\n→ ElevenLabs ($5)\n→ Cloud Run ($5)\nreplaces $500+ in manual work.",
+    "tools I use daily, no exceptions:\n1. Cursor — codes with full codebase context\n2. Perplexity — research without SEO spam\n3. Claude — analysis and long writing\n4. n8n — free Zapier alternative\n5. Typefully — scheduled posting via API",
+    # Metric Drop format
+    "170 followers. 9 agents. 24+ digital products.\nthe swarm posted 4 tweets today while I worked on other things.\nrevenue engine runs whether I'm online or not.",
+    "deployed to Cloud Run this morning.\n18 scheduled jobs. health check passing.\nthe swarm doesn't need my laptop open anymore.",
+    "$70/month in tools. $0 in manual labor.\nthe content pipeline runs on autopilot.\nthat's the whole point of automation.",
+    "set up the email engine in 30 seconds.\napp password + SMTP. no OAuth, no GCP console.\nsometimes simple beats sophisticated.",
+    # Builder Update format
+    "shipped this week:\n→ Cloud Run deployment (24/7 uptime)\n→ Lemon Squeezy integration (revenue tracking)\n→ Gmail engine (lead nurture)\n→ smart CTAs (dynamic checkout links)\nnext: webhook notifications on every sale.",
+    "the autonomous swarm just leveled up:\n→ posts via Typefully API (no browser needed)\n→ syncs revenue from Lemon Squeezy\n→ runs 18 jobs on Cloud Run\nall from one Python scheduler.",
 ]
 
 ENGAGEMENT_TWEETS = [
-    "What AI tool do you use the most? I'll share if there's a free alternative.",
-    "Drop your biggest workflow bottleneck. I'll try to find an automation for it.",
-    "What's the one repetitive task eating your time? Reply and I'll share a fix.",
-    "Genuinely curious — what's stopping you from automating your content?",
-    "Drop your favorite tool — I'll share mine too.",
-    "What would you automate if you could? I'll share how I'd approach it.",
-    "Hot take: Most people don't need ChatGPT Plus. When is it actually worth it though?",
-    "What's one AI tool you tried and loved? Looking for new things to test.",
+    "what's one task you do every day that could be automated?\nreply and I'll map the pipeline.",
+    "building AI agents or just using ChatGPT?\nhonest answers only.",
+    "what's your biggest bottleneck — content, leads, or closing?\nI've automated all three. happy to share.",
+    "hot take: you don't need a $200/month AI stack.\n$70 covers everything if you stack the right tools.\nwhat are you paying?",
+    "show me your automation stack. I'll show you mine.",
+    "unpopular opinion: most people buy AI tools but never automate anything.\nwhat's actually running for you right now?",
+    "what would you ship if you had 9 AI agents working 24/7?",
+    "name one workflow you want automated.\nbest answer gets a full breakdown.",
 ]
 
 THREAD_STARTERS = [
-    "Tested a bunch of AI tools over the past 6 months. Here are the only 5 I still pay for:",
-    "My daily AI workflow takes about 12 minutes now. It used to take 4 hours. Here's how:",
-    "The $70/month AI stack that honestly runs most of my workflow. Thread:",
-    "5 automations I set up once and haven't touched since. They just run. Here's each one:",
-    "AI tools I don't see people talking about but genuinely love. Thread:",
+    "9 AI agents running my business 24/7.\nhere's exactly what each one does:\n🧵",
+    "I tested 30+ AI tools over 6 months.\nonly 5 survived. here's which ones and why:\n🧵",
+    "how I built an autonomous content engine in one weekend.\nresearch → write → humanize → post → engage.\nstep by step:\n🧵",
+    "the $70/month stack that replaced $500 in subscriptions.\nevery tool, every config, every workflow:\n🧵",
+    "how to go from 'AI curious' to 'AI profitable' in 30 days.\nno courses. no gurus. just tools and systems:\n🧵",
 ]
 
 PROMO_TWEETS = [
-    "Put together a free guide with every tool, workflow, and shortcut I use. No fluff. Link in bio.",
-    "Someone asked me to share my full AI stack. So I did. Free breakdown in bio.",
-    "Made a guide to help people skip the trial and error I went through. Free. Link in bio.",
+    "9 AI agent pipelines. drop in your API key and go.\nfull source → {url}",
+    "the exact system running this account 24/7.\nevery agent. every config. every pipeline.\n→ {url}",
+    "built the automation? sell the blueprint.\nthat's the model. here's mine:\n→ {url}",
 ]
 
-# Smart CTA store URL (products auto-loaded from LS API at startup)
-LS_STORE_URL = "https://e-labz.lemonsqueezy.com"
+# Smart CTA store URL
+LS_STORE_URL = "https://autostackhq.lemonsqueezy.com"
 
 SMART_CTAS = [
-    "9 AI agent pipelines in one kit. Drop in your API key and go. {url}",
-    "The exact autonomous system running @AutoStackHQ 24/7. Full source. {url}",
-    "Built an AI swarm that posts, engages, and tracks revenue on its own. Here's the blueprint: {url}",
-    "Every pipeline, every agent, every config file. No tutorials — just working code. {url}",
+    "9 AI agent pipelines. drop in your API key and go.\nfull source: {url}",
+    "the exact system running @AutoStackHQ 24/7. every config file included.\n→ {url}",
+    "built an autonomous content + revenue engine. here's the full blueprint:\n→ {url}",
+    "every pipeline, every agent. no tutorials — working code.\n→ {url}",
 ]
 
 # Track which tweets have been posted to avoid repeats
@@ -158,14 +157,41 @@ _posted_today = set()
 # Research-generated tweet cache
 RESEARCH_CACHE_PATH = PROJECT_ROOT / "output" / "research" / "tweet_cache.json"
 
+# Web scrape artifacts that must be stripped from content
+_SCRAPE_ARTIFACTS = [
+    "# Related Answers", "### Here's what we'll cover", "Image 5",
+    "## The 5 Best", "## Related", "### 1", "...", "<!--",
+]
+
+
+def _sanitize_tweet(text: str) -> str | None:
+    """Strip web scrape artifacts and validate tweet quality."""
+    # Kill any tweet containing raw markdown/scrape leaks
+    for artifact in _SCRAPE_ARTIFACTS:
+        if artifact in text:
+            return None
+    # Strip trailing ellipsis fragments
+    if text.rstrip().endswith("..."):
+        return None
+    # Must be within Twitter limits
+    if len(text) > 280 or len(text) < 20:
+        return None
+    return text.strip()
+
 
 def _load_research_tweets() -> list[str]:
-    """Load fresh tweet ideas from research cache."""
+    """Load fresh tweet ideas from research cache (sanitized)."""
     try:
         if RESEARCH_CACHE_PATH.exists():
             import json
             data = json.loads(RESEARCH_CACHE_PATH.read_text())
-            return [t for t in data if isinstance(t, str) and len(t) > 20]
+            cleaned = []
+            for t in data:
+                if isinstance(t, str):
+                    result = _sanitize_tweet(t)
+                    if result:
+                        cleaned.append(result)
+            return cleaned
     except Exception:
         pass
     return []
