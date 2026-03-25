@@ -1,0 +1,2 @@
+{"timestamp": "2026-03-25T15:20:51.844743", "type": "scheduler", "event": "swarm_started", "job_name": "main", "details": "14 jobs loaded"}
+{"timestamp": "2026-03-25T15:20:51.845642", "type": "scheduler", "event": "job_start", "job_name": "metrics_sync", "details": ""}

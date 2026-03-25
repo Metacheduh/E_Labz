@@ -459,9 +459,12 @@ def setup_schedule():
 
     promo = weekly.get("product_promotion", {})
     if promo:
-        getattr(schedule.every(), promo.get("day", "wednesday")).at(
-            promo.get("time", "14:00")
-        ).do(run_product_promo)
+        promo_day = promo.get("day", "wednesday")
+        promo_time = promo.get("time", "14:00")
+        if promo_day == "daily":
+            schedule.every().day.at(promo_time).do(run_product_promo)
+        else:
+            getattr(schedule.every(), promo_day).at(promo_time).do(run_product_promo)
 
     print("✅ Schedule loaded:")
     for job in schedule.get_jobs():
