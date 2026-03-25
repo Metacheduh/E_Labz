@@ -91,64 +91,65 @@ def check_kill_switch() -> bool:
 
 
 # ============================================================
-# TWEET CONTENT LIBRARY — @exm7777-inspired: builder authority, proof-based
-# Format: punchy hook → arrow list → result/CTA
+# TWEET CONTENT LIBRARY — builder authority, proof-based
+# Voice: I'm a builder who ships AI products. I share what works.
+# RULE: Never reveal AI runs the account. We are the builder.
 # ============================================================
 
 VALUE_TWEETS = [
     # How-To format
-    "how I post 4x/day without touching Twitter:\n→ Brave Search (research)\n→ GPT-4 (write)\n→ Voice Engine (humanize)\n→ Typefully API (schedule)\nzero manual input.",
-    "how I cut content creation from 4 hours to 12 minutes:\n→ automated research\n→ automated writing\n→ automated posting\n→ automated engagement\nthe swarm handles it all.",
+    "how I create content 4x faster:\n→ Brave Search for research\n→ GPT-4 for first drafts\n→ edit for voice and accuracy\n→ schedule with Typefully\nsaved me 3+ hours/day.",
+    "how I cut content creation from 4 hours to 12 minutes:\n→ research templates\n→ AI-assisted drafts\n→ personal editing pass\n→ batch scheduling\ngame changer for solo builders.",
     "how to build your first AI agent pipeline:\n→ pick one repetitive task\n→ chain 3 APIs together\n→ add a scheduler\n→ deploy to Cloud Run\nthat's it. no framework needed.",
-    "how I track revenue without logging into dashboards:\n→ Lemon Squeezy API (sales)\n→ Twitter API (engagement)\n→ SQLite (local cache)\n→ daily sync at 8AM\nall automated.",
+    "how I track revenue without logging into dashboards:\n→ Lemon Squeezy API (sales)\n→ Twitter API (engagement)\n→ SQLite (local cache)\n→ daily sync at 8AM\nbuilt it once, runs forever.",
     "how I automated lead capture:\n→ portfolio site with email form\n→ free guide as lead magnet\n→ welcome email via SMTP\n→ product link in follow-up\ncost: $0/month.",
     # Stack Reveal format
-    "the stack running @AutoStackHQ 24/7:\n→ Cloud Run (always on)\n→ GPT-4 (content)\n→ Brave Search (research)\n→ Typefully (posting)\n→ Lemon Squeezy (revenue)\n9 agents. zero downtime.",
+    "my daily tech stack:\n→ Cloud Run (hosting)\n→ GPT-4 (writing assist)\n→ Brave Search (research)\n→ Typefully (scheduling)\n→ Lemon Squeezy (store)\nunder $70/month total.",
     "my $70/month AI stack:\n→ GPT-4 ($20)\n→ Perplexity Pro ($20)\n→ Cursor ($20)\n→ ElevenLabs ($5)\n→ Cloud Run ($5)\nreplaces $500+ in manual work.",
     "tools I use daily, no exceptions:\n1. Cursor — codes with full codebase context\n2. Perplexity — research without SEO spam\n3. Claude — analysis and long writing\n4. n8n — free Zapier alternative\n5. Typefully — scheduled posting via API",
     # Metric Drop format
-    "170 followers. 9 agents. 24+ digital products.\nthe swarm posted 4 tweets today while I worked on other things.\nrevenue engine runs whether I'm online or not.",
-    "deployed to Cloud Run this morning.\n18 scheduled jobs. health check passing.\nthe swarm doesn't need my laptop open anymore.",
-    "$70/month in tools. $0 in manual labor.\nthe content pipeline runs on autopilot.\nthat's the whole point of automation.",
-    "set up the email engine in 30 seconds.\napp password + SMTP. no OAuth, no GCP console.\nsometimes simple beats sophisticated.",
+    "170 followers. 24+ digital products.\nposted consistently for 6 months.\nrevenue engine is starting to compound.",
+    "deployed a new product to Cloud Run this morning.\n18 scheduled jobs running.\nthe system doesn't need my laptop open.",
+    "$70/month in tools. hours of manual work saved.\nthe content pipeline runs on autopilot.\nthat's the whole point of building systems.",
+    "set up the email engine in 30 minutes.\napp password + SMTP. no OAuth, no GCP console.\nsometimes simple beats sophisticated.",
     # Builder Update format
     "shipped this week:\n→ Cloud Run deployment (24/7 uptime)\n→ Lemon Squeezy integration (revenue tracking)\n→ Gmail engine (lead nurture)\n→ smart CTAs (dynamic checkout links)\nnext: webhook notifications on every sale.",
-    "the autonomous swarm just leveled up:\n→ posts via Typefully API (no browser needed)\n→ syncs revenue from Lemon Squeezy\n→ runs 18 jobs on Cloud Run\nall from one Python scheduler.",
+    "leveled up the stack this week:\n→ posting via Typefully API\n→ revenue sync from Lemon Squeezy\n→ 18 scheduled jobs on Cloud Run\nall from one Python codebase.",
 ]
 
 ENGAGEMENT_TWEETS = [
     "what's one task you do every day that could be automated?\nreply and I'll map the pipeline.",
-    "building AI agents or just using ChatGPT?\nhonest answers only.",
-    "what's your biggest bottleneck — content, leads, or closing?\nI've automated all three. happy to share.",
-    "hot take: you don't need a $200/month AI stack.\n$70 covers everything if you stack the right tools.\nwhat are you paying?",
-    "show me your automation stack. I'll show you mine.",
-    "unpopular opinion: most people buy AI tools but never automate anything.\nwhat's actually running for you right now?",
-    "what would you ship if you had 9 AI agents working 24/7?",
+    "building AI tools or just using ChatGPT?\nhonest answers only.",
+    "what's your biggest bottleneck — content, leads, or closing?\nI've built systems for all three. happy to share.",
+    "hot take: you don't need a $200/month AI stack.\n$70 covers everything if you pick the right tools.\nwhat are you paying?",
+    "show me your tool stack. I'll show you mine.",
+    "unpopular opinion: most people buy AI tools but never build anything with them.\nwhat have you actually shipped?",
+    "what would you build if you had a full AI toolkit ready to go?",
     "name one workflow you want automated.\nbest answer gets a full breakdown.",
 ]
 
 THREAD_STARTERS = [
-    "9 AI agents running my business 24/7.\nhere's exactly what each one does:\n🧵",
+    "I built 24 AI-powered products this year.\nhere's what each one does and how I built it:\n🧵",
     "I tested 30+ AI tools over 6 months.\nonly 5 survived. here's which ones and why:\n🧵",
-    "how I built an autonomous content engine in one weekend.\nresearch → write → humanize → post → engage.\nstep by step:\n🧵",
+    "how I built a full content engine in one weekend.\nresearch → write → edit → post.\nstep by step:\n🧵",
     "the $70/month stack that replaced $500 in subscriptions.\nevery tool, every config, every workflow:\n🧵",
     "how to go from 'AI curious' to 'AI profitable' in 30 days.\nno courses. no gurus. just tools and systems:\n🧵",
 ]
 
 PROMO_TWEETS = [
-    "9 AI agent pipelines. drop in your API key and go.\nfull source → {url}",
-    "the exact system running this account 24/7.\nevery agent. every config. every pipeline.\n→ {url}",
-    "built the automation? sell the blueprint.\nthat's the model. here's mine:\n→ {url}",
+    "I packaged my entire AI pipeline into a kit.\ndrop in your API key and go.\nfull source → {url}",
+    "the exact system I use to run this business.\nevery config. every pipeline.\n→ {url}",
+    "built the system? sell the blueprint.\nthat's the model. here's mine:\n→ {url}",
 ]
 
 # Smart CTA store URL
 LS_STORE_URL = "https://autostackhq.lemonsqueezy.com"
 
 SMART_CTAS = [
-    "9 AI agent pipelines. drop in your API key and go.\nfull source: {url}",
-    "the exact system running @AutoStackHQ 24/7. every config file included.\n→ {url}",
-    "built an autonomous content + revenue engine. here's the full blueprint:\n→ {url}",
-    "every pipeline, every agent. no tutorials — working code.\n→ {url}",
+    "I packaged my AI pipeline into a kit. drop in your API key and go.\nfull source: {url}",
+    "the exact system I use to run @AutoStackHQ. every config file included.\n→ {url}",
+    "built a full content + revenue engine. here's the blueprint:\n→ {url}",
+    "every pipeline, every tool. no tutorials — working code.\n→ {url}",
 ]
 
 # Track which tweets have been posted to avoid repeats
