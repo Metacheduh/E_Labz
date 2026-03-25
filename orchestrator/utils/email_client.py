@@ -125,7 +125,7 @@ Thanks for grabbing the free guide — here's what's inside:
 • Step-by-step deployment guide (Cloud Run + ADK)
 
 If you want the full source code, check out the store:
-→ https://e-labz.lemonsqueezy.com
+→ https://autostackhq.lemonsqueezy.com
 
 Questions? Just reply to this email.
 

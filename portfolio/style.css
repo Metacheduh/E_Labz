@@ -661,3 +661,33 @@ a:hover { color: #fff; }
 .badge-free {
   position: static; display: inline-block; margin-bottom: 20px;
 }
+
+/* ═══ Utility classes to replace inline styles ═══ */
+.proof-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 16px; margin-bottom: 48px;
+}
+.proof-grid .swarm-card { text-align: center; }
+.proof-grid .swarm-card p {
+  font-family: var(--mono); font-size: .82rem;
+  color: var(--accent2); margin-bottom: 8px;
+}
+.proof-grid .btn-sm { font-size: .78rem; }
+.proof-cta { text-align: center; padding: 32px 0; }
+.proof-cta p {
+  color: var(--text-dim); font-size: 1.1rem;
+  max-width: 600px; margin: 0 auto 24px; font-weight: 300;
+}
+.cta-row p { color: var(--text-dim); margin-bottom: 16px; font-weight: 300; }
+.store-card.featured-product.stryke {
+  border-color: rgba(6,214,160,.3);
+  background: linear-gradient(135deg, rgba(6,214,160,.05), rgba(139,92,246,.05));
+}
+.popup-content { position: relative; }
+.popup-footer { font-size: .72rem; color: rgba(255,255,255,.3); margin-top: 12px; }
+.popup-submit { width: 100%; margin-top: 12px; }
+.mobile-sticky-cta .btn { width: 100%; text-align: center; }
+
+@media (max-width: 768px) {
+  .proof-grid { grid-template-columns: 1fr; }
+}

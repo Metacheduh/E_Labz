@@ -518,7 +518,7 @@ def handle_shutdown(signum, frame):
 # ============================================================
 
 class _HealthHandler(BaseHTTPRequestHandler):
-    """Minimal health check handler for Cloud Run."""
+    """Minimal health check + webhook handler for Cloud Run."""
     def do_GET(self):
         if self.path == "/health" or self.path == "/":
             self.send_response(200)
@@ -532,6 +532,26 @@ class _HealthHandler(BaseHTTPRequestHandler):
                 "next_run": str(schedule.next_run()) if schedule.get_jobs() else "none",
             }
             self.wfile.write(json.dumps(status).encode())
+        else:
+            self.send_response(404)
+            self.end_headers()
+
+    def do_POST(self):
+        if self.path == "/webhook/lemonsqueezy":
+            content_length = int(self.headers.get("Content-Length", 0))
+            payload = self.rfile.read(content_length)
+            headers = dict(self.headers)
+            try:
+                from orchestrator.webhooks.lemonsqueezy import handle_webhook
+                result = handle_webhook(payload, headers)
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.end_headers()
+                self.wfile.write(json.dumps(result).encode())
+            except Exception as e:
+                print(f"  [WEBHOOK] Error: {e}")
+                self.send_response(500)
+                self.end_headers()
         else:
             self.send_response(404)
             self.end_headers()
