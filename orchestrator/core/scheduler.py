@@ -139,6 +139,16 @@ PROMO_TWEETS = [
     "Made a guide to help people skip the trial and error I went through. Free. Link in bio.",
 ]
 
+# Smart CTA store URL (products auto-loaded from LS API at startup)
+LS_STORE_URL = "https://e-labz.lemonsqueezy.com"
+
+SMART_CTAS = [
+    "9 AI agent pipelines in one kit. Drop in your API key and go. {url}",
+    "The exact autonomous system running @AutoStackHQ 24/7. Full source. {url}",
+    "Built an AI swarm that posts, engages, and tracks revenue on its own. Here's the blueprint: {url}",
+    "Every pipeline, every agent, every config file. No tutorials — just working code. {url}",
+]
+
 # Track which tweets have been posted to avoid repeats
 _posted_today = set()
 
@@ -305,7 +315,7 @@ def run_reply_engagement():
 
 
 def run_metrics_sync():
-    """Stage 6: Sync real data from Twitter API + Stripe."""
+    """Stage 6: Sync real data from Twitter API + Lemon Squeezy + Stripe."""
     log_scheduler_event("job_start", "metrics_sync")
     print(f"📡 [{datetime.now().strftime('%H:%M')}] Syncing metrics from APIs...")
     try:
@@ -364,13 +374,23 @@ def run_weekly_deep_review():
 
 
 def run_product_promo():
-    """Weekly (Wednesday): Promote products."""
+    """Weekly (Wednesday): Promote products with smart CTAs."""
     if check_kill_switch():
         return
     log_scheduler_event("job_start", "product_promo")
     print(f"📣 [{datetime.now().strftime('%H:%M')}] Running product promotion...")
-    tweet = _pick_unique(PROMO_TWEETS)
+
+    # Alternate between generic promo and smart CTA with checkout link
+    if random.random() < 0.6:
+        # Smart CTA with real checkout URL
+        cta = random.choice(SMART_CTAS)
+        tweet = cta.format(url=LS_STORE_URL)
+    else:
+        tweet = _pick_unique(PROMO_TWEETS)
+
     result = post_tweet(tweet, humanize=True)
+    log_post(tweet, result.get('method', 'unknown'), result.get('status', 'failed'),
+             post_type='promo', post_id=str(result.get('id', '')), error=result.get('reason', ''))
     print(f"   ↳ Promo result: {result.get('status', 'unknown')}")
 
 

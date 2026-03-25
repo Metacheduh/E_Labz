@@ -177,8 +177,53 @@ def _classify_content(text: str) -> str:
 
 
 # ============================================================
-# STORE SYNC — Pull real revenue data from Stripe
+# STORE SYNC — Pull real revenue data from Lemon Squeezy / Stripe
 # ============================================================
+
+def sync_lemonsqueezy_revenue() -> dict:
+    """Pull today's revenue from Lemon Squeezy API (10s timeout to prevent hanging)."""
+    ls_key = os.getenv("LEMONSQUEEZY_API_KEY", "")
+    if not ls_key:
+        print("  [SKIP] No Lemon Squeezy key — skipping LS revenue sync")
+        return {"revenue": 0.0, "sales": 0}
+
+    print("[SYNC] Pulling Lemon Squeezy revenue...")
+    try:
+        today_str = date.today().isoformat()
+        headers = {
+            "Accept": "application/vnd.api+json",
+            "Authorization": f"Bearer {ls_key}",
+        }
+        resp = requests.get(
+            "https://api.lemonsqueezy.com/v1/orders",
+            params={"filter[created_at]": today_str, "page[size]": 100},
+            headers=headers,
+            timeout=10,  # Hard 10s timeout — never hang
+        )
+
+        if resp.status_code == 200:
+            data = resp.json()
+            orders = data.get("data", [])
+            total_revenue = sum(
+                int(o["attributes"].get("total", 0)) / 100
+                for o in orders
+                if o["attributes"].get("status") in ("paid", "refunded")
+            )
+            paid_orders = [o for o in orders if o["attributes"].get("status") == "paid"]
+            result = {"revenue": total_revenue, "sales": len(paid_orders), "source": "lemonsqueezy"}
+            print(f"  [OK] Lemon Squeezy: ${total_revenue:.2f} from {len(paid_orders)} sales today")
+            return result
+        else:
+            print(f"  [WARN] Lemon Squeezy API error {resp.status_code}")
+            return {"revenue": 0.0, "sales": 0}
+
+    except requests.exceptions.Timeout:
+        print("  [WARN] Lemon Squeezy API timed out (10s) — skipping")
+        return {"revenue": 0.0, "sales": 0}
+    except Exception as e:
+        print(f"  [ERR] Lemon Squeezy sync failed: {e}")
+        return {"revenue": 0.0, "sales": 0}
+
 
 def sync_stripe_revenue() -> dict:
     """Pull today's revenue from Stripe API."""
@@ -310,9 +355,13 @@ def run_full_sync() -> dict:
     today_str = date.today().isoformat()
     todays_tweets = [t for t in tweets if t.get("created_at", "").startswith(today_str)]
 
-    # 3. Revenue (try Stripe first, then Gumroad)
-    store_platform = os.getenv("STORE_PLATFORM", "gumroad")
-    if store_platform == "stripe":
+    # 3. Revenue (try Lemon Squeezy first, then Stripe, then Gumroad)
+    store_platform = os.getenv("STORE_PLATFORM", "lemonsqueezy")
+    if store_platform == "lemonsqueezy":
+        revenue_data = sync_lemonsqueezy_revenue()
+        if revenue_data["revenue"] == 0 and revenue_data.get("sales", 0) == 0:
+            revenue_data = sync_stripe_revenue()
+    elif store_platform == "stripe":
         revenue_data = sync_stripe_revenue()
     else:
         revenue_data = sync_gumroad_revenue()
