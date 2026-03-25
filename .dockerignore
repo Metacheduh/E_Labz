@@ -1,21 +1,29 @@
-__pycache__/
-*.pyc
-*.pyo
-*.db
-.git/
+# Exclude everything not needed by the scheduler
+.git
 .gitignore
-node_modules/
-.vscode/
-.agents/
-.pytest_cache/
-.venv/
-ADK_Pipelines/
-AI_Swarm/
-portfolio/
+.github
+.agents
+.gemini
+node_modules
+__pycache__
+*.pyc
+
+# Large dirs not needed in container
+products/
 archive/
-docs/
+portfolio/
+ADK_Pipelines/
 tests/
+docs/
+
+# Media and artifacts
+*.png
+*.jpg
+*.webp
+*.mp4
+*.zip
+
+# Dev files
 *.md
-output/audio/*
-output/tweets/*
-output/research/tweet_cache.json
+LICENSE
+.env.example
