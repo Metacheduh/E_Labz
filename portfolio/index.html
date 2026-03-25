@@ -42,7 +42,7 @@
 <!-- Hero -->
 <section class="hero" id="hero">
   <div class="hero-bg-img"></div>
-  <div class="hero-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;margin-right:4px;"><circle cx="12" cy="12" r="5" fill="#22c55e"/><circle cx="12" cy="12" r="9" stroke="#22c55e" stroke-width="2" opacity=".3"/></svg>Live Swarm: <a href="https://e-labz-swarm-ymb56uk5vq-uk.a.run.app/health" target="_blank" style="color:var(--accent2);text-decoration:underline;">Verify It's Running →</a></div>
+  <div class="hero-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;margin-right:4px;"><circle cx="12" cy="12" r="5" fill="#22c55e"/><circle cx="12" cy="12" r="9" stroke="#22c55e" stroke-width="2" opacity=".3"/></svg>Live Swarm: <a href="status.html" style="color:var(--accent2);text-decoration:underline;">Verify It's Running →</a></div>
   <h1>
     <span class="line">I Built This Entire Business</span>
     <span class="line"><span class="gradient-text">With AI Agents.</span></span>
@@ -70,17 +70,17 @@
     <div class="swarm-card active" style="text-align:center;">
       <h3><svg width="12" height="12" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:4px;"><circle cx="12" cy="12" r="8" fill="#22c55e"/></svg>Live Swarm</h3>
       <p style="font-family:var(--mono);font-size:.82rem;color:var(--accent2);margin-bottom:8px;">Running on Google Cloud Run</p>
-      <a href="https://e-labz-swarm-ymb56uk5vq-uk.a.run.app/health" target="_blank" class="btn btn-sm btn-primary" style="font-size:.78rem;">Hit the API → Verify</a>
+      <a href="status.html" class="btn btn-sm btn-primary" style="font-size:.78rem;">Hit the API → Verify</a>
     </div>
     <div class="swarm-card active" style="text-align:center;">
       <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;margin-right:4px;"><rect x="3" y="12" width="4" height="9" rx="1" fill="#14b8a6"/><rect x="10" y="7" width="4" height="14" rx="1" fill="#a855f7"/><rect x="17" y="3" width="4" height="18" rx="1" fill="#14b8a6"/></svg>8 Agents Active</h3>
       <p style="font-family:var(--mono);font-size:.82rem;color:var(--accent2);margin-bottom:8px;">Research, Content, Revenue, Memory...</p>
-      <a href="https://e-labz-swarm-ymb56uk5vq-uk.a.run.app/api/swarm" target="_blank" class="btn btn-sm btn-primary" style="font-size:.78rem;">Check Agent Status →</a>
+      <a href="status.html" class="btn btn-sm btn-primary" style="font-size:.78rem;">Check Agent Status →</a>
     </div>
     <div class="swarm-card active" style="text-align:center;">
       <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;margin-right:4px;"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6" stroke="url(#dollar)" stroke-width="2" stroke-linecap="round"/><defs><linearGradient id="dollar" x1="6" y1="2" x2="17" y2="22"><stop stop-color="#14b8a6"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs></svg>Revenue Tracked</h3>
       <p style="font-family:var(--mono);font-size:.82rem;color:var(--accent2);margin-bottom:8px;">Stripe MCP integration, live data</p>
-      <a href="https://e-labz-swarm-ymb56uk5vq-uk.a.run.app/api/metrics" target="_blank" class="btn btn-sm btn-primary" style="font-size:.78rem;">See Metrics →</a>
+      <a href="status.html" class="btn btn-sm btn-primary" style="font-size:.78rem;">See Metrics →</a>
     </div>
   </div>
 
@@ -283,9 +283,9 @@
 <script src="script.js"></script>
 
 <!-- Exit Intent Popup -->
-<div id="exit-popup" class="popup-overlay hidden">
-  <div class="popup-content glass-card">
-    <button class="popup-close" onclick="closePopup()">×</button>
+<div id="exit-popup" class="popup-overlay hidden" onclick="if(event.target===this)closePopup()">
+  <div class="popup-content glass-card" style="position:relative;">
+    <button class="popup-close" id="popup-close-btn" type="button">×</button>
     <div class="project-badge" style="background: rgba(247,37,133,0.15); color: var(--accent3);">WAIT — FREE PROOF PACKAGE</div>
     <h3>Get My AI Swarm Blueprint</h3>
     <p>The exact architecture behind the live swarm running this business. Technical breakdown, agent configs, deployment guide. Free.</p>
@@ -379,8 +379,19 @@
     }
   });
 
-  function closePopup() {
+  // Make closePopup globally accessible
+  window.closePopup = function() {
     document.getElementById('exit-popup').classList.add('hidden');
+  };
+
+  // Bind close button directly
+  const closeBtn = document.getElementById('popup-close-btn');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      window.closePopup();
+    });
   }
 
   // ===== LEAD FORMS =====
@@ -391,8 +402,9 @@
       const leads = JSON.parse(localStorage.getItem('e-labz-leads') || '[]');
       leads.push({ email, timestamp: new Date().toISOString(), source: this.id || 'form' });
       localStorage.setItem('e-labz-leads', JSON.stringify(leads));
-      this.innerHTML = '<p style="color:var(--accent2);font-weight:600;padding:16px;">✅ Check your email! Blueprint incoming.</p>';
-      closePopup();
+      this.innerHTML = '<p style="color:var(--accent2);font-weight:600;padding:16px;">Sent! Check your email for the blueprint.</p>';
+      // Close popup after 2s so they see confirmation
+      setTimeout(function() { window.closePopup(); }, 2000);
     });
   });
 

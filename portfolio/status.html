@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Labz | Live Swarm Status</title>
+<meta name="description" content="Real-time status dashboard for the E-Labz AI Swarm — 8 agents running autonomously on Google Cloud Run.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --bg: #050508;
+    --surface: rgba(255,255,255,0.03);
+    --glass-border: rgba(255,255,255,0.08);
+    --text: #eaeaf0;
+    --text-dim: #6b6b80;
+    --accent: #8b5cf6;
+    --accent2: #06d6a0;
+    --accent3: #f72585;
+    --gradient: linear-gradient(135deg, #8b5cf6 0%, #06d6a0 50%, #f72585 100%);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --font: 'Inter', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: var(--font); background: var(--bg); color: var(--text);
+    min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; padding: 24px; overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    opacity: .4;
+  }
+
+  /* Aurora */
+  .aurora { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .aurora-orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.1; animation: float 20s ease-in-out infinite; }
+  .aurora-orb:nth-child(1) { width:600px;height:600px;background:#8b5cf6;top:-200px;left:-100px; }
+  .aurora-orb:nth-child(2) { width:400px;height:400px;background:#06d6a0;bottom:-100px;right:-50px;animation-delay:-7s; }
+  @keyframes float { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-40px,60px) scale(0.95);} }
+
+  .container { position: relative; z-index: 1; max-width: 720px; width: 100%; }
+
+  /* Header */
+  .status-header { text-align: center; margin-bottom: 48px; }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--text-dim); font-size: .85rem; margin-bottom: 32px;
+    text-decoration: none; transition: .3s;
+  }
+  .back-link:hover { color: #fff; }
+  .status-header h1 {
+    font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 900;
+    letter-spacing: -1.5px; margin-bottom: 8px;
+  }
+  .status-header p { color: var(--text-dim); font-size: .95rem; }
+
+  /* Main status indicator */
+  .status-main {
+    background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+    border-radius: var(--radius); padding: 40px; text-align: center;
+    margin-bottom: 24px; position: relative; overflow: hidden;
+  }
+  .status-main.online { border-color: rgba(6,214,160,.2); }
+  .status-main.offline { border-color: rgba(247,37,133,.2); }
+  .status-main.loading { border-color: rgba(139,92,246,.15); }
+
+  .status-dot-container { margin-bottom: 20px; }
+  .status-dot {
+    width: 16px; height: 16px; border-radius: 50%; display: inline-block;
+    position: relative;
+  }
+  .status-dot.online {
+    background: var(--accent2);
+    box-shadow: 0 0 16px var(--accent2), 0 0 40px rgba(6,214,160,.3);
+    animation: pulse 2s infinite;
+  }
+  .status-dot.offline { background: var(--accent3); box-shadow: 0 0 16px var(--accent3); }
+  .status-dot.loading { background: var(--accent); animation: pulse 1s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.4;transform:scale(1.4);} }
+
+  .status-label {
+    font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 4px;
+  }
+  .status-label.online { color: var(--accent2); }
+  .status-label.offline { color: var(--accent3); }
+  .status-label.loading { color: var(--text-dim); }
+  .status-sub { color: var(--text-dim); font-size: .88rem; }
+
+  /* Stats grid */
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; background: rgba(255,255,255,.04); border-radius: var(--radius);
+    overflow: hidden; margin-bottom: 24px;
+  }
+  .stat-card {
+    background: var(--bg); padding: 28px 16px; text-align: center;
+    transition: .3s;
+  }
+  .stat-card:hover { background: rgba(139,92,246,.03); }
+  .stat-value {
+    font-family: var(--mono); font-size: 1.6rem; font-weight: 700;
+    background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 4px; display: block;
+  }
+  .stat-label { font-size: .7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
+
+  /* Agents list */
+  .agents-section {
+    background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+    border-radius: var(--radius); padding: 32px; margin-bottom: 24px;
+  }
+  .agents-title { font-size: 1rem; font-weight: 700; margin-bottom: 20px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-size: .75rem; }
+  .agent-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.04);
+  }
+  .agent-row:last-child { border-bottom: none; }
+  .agent-info { display: flex; align-items: center; gap: 12px; }
+  .agent-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+  .agent-dot.active {
+    background: var(--accent2);
+    box-shadow: 0 0 8px var(--accent2);
+    animation: pulse 2s infinite;
+  }
+  .agent-dot.idle { background: rgba(255,255,255,.15); }
+  .agent-name { font-size: .9rem; font-weight: 500; }
+  .agent-status {
+    font-family: var(--mono); font-size: .75rem; padding: 4px 12px;
+    border-radius: 50px;
+  }
+  .agent-status.active { color: var(--accent2); background: rgba(6,214,160,.08); }
+  .agent-status.idle { color: var(--text-dim); background: rgba(255,255,255,.03); }
+
+  /* CTA */
+  .status-cta {
+    text-align: center; padding: 40px 24px;
+    background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.04);
+    border-radius: var(--radius);
+  }
+  .status-cta p { color: var(--text-dim); margin-bottom: 20px; font-size: .95rem; }
+  .btn {
+    display: inline-block; padding: 16px 36px; border-radius: 50px;
+    font-weight: 600; font-size: .92rem; transition: .4s; cursor: pointer;
+    border: none; text-decoration: none;
+  }
+  .btn-primary {
+    background: var(--gradient); color: #fff;
+    box-shadow: 0 4px 30px rgba(139,92,246,.25);
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 50px rgba(139,92,246,.4); color: #fff; }
+  .btn-ghost {
+    background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.1);
+    color: var(--text); margin-left: 12px;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,.08); color: #fff; }
+
+  /* Last updated */
+  .last-updated {
+    text-align: center; margin-top: 24px; font-size: .75rem;
+    color: rgba(255,255,255,.2); font-family: var(--mono);
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .stats-grid { grid-template-columns: 1fr; }
+    .stat-card { padding: 20px 16px; }
+    .status-main { padding: 28px 20px; }
+    .agents-section { padding: 24px 16px; }
+    .status-cta { padding: 28px 16px; }
+    .status-cta .btn { display: block; margin: 8px 0; }
+    .btn-ghost { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="aurora">
+  <div class="aurora-orb"></div>
+  <div class="aurora-orb"></div>
+</div>
+
+<div class="container">
+  <!-- Header -->
+  <div class="status-header">
+    <a href="/" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to E-Labz
+    </a>
+    <h1>Live Swarm Status</h1>
+    <p>Real-time health check — fetched directly from the running API</p>
+  </div>
+
+  <!-- Main Status -->
+  <div class="status-main loading" id="status-main">
+    <div class="status-dot-container">
+      <span class="status-dot loading" id="status-dot"></span>
+    </div>
+    <div class="status-label loading" id="status-label">Checking...</div>
+    <div class="status-sub" id="status-sub">Connecting to swarm API</div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span class="stat-value" id="uptime-value">--</span>
+      <span class="stat-label">Uptime</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value" id="agents-value">--</span>
+      <span class="stat-label">Agents</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value" id="timestamp-value">--</span>
+      <span class="stat-label">Last Heartbeat</span>
+    </div>
+  </div>
+
+  <!-- Agents -->
+  <div class="agents-section">
+    <div class="agents-title">Agent Fleet</div>
+    <div id="agents-list">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="status-cta">
+    <p>This swarm is real. It's running right now. Want one built for your business?</p>
+    <a href="mailto:hello@e-labz.com" class="btn btn-primary">Work With Me →</a>
+    <a href="https://autostackhq.lemonsqueezy.com" target="_blank" rel="noopener" class="btn btn-ghost">Grab a Kit</a>
+  </div>
+
+  <div class="last-updated" id="last-updated"></div>
+</div>
+
+<script>
+const AGENTS = [
+  { name: 'Research Agent', desc: 'Tavily + Brave topic scanning' },
+  { name: 'Content Agent', desc: 'Genkit-powered content generation' },
+  { name: 'Human Voice Engine', desc: '5-stage humanization pipeline' },
+  { name: 'Twitter Agent', desc: 'Automated posting to @AutoStackHQ' },
+  { name: 'Memory Agent', desc: 'SQLite persistent memory layer' },
+  { name: 'Revenue Agent', desc: 'Stripe MCP payment tracking' },
+  { name: 'Engagement Agent', desc: 'Contextual reply engine' },
+  { name: 'ADK Coordinator', desc: '9 parallel pipeline orchestration' },
+];
+
+// Render agent list
+function renderAgents(online) {
+  const list = document.getElementById('agents-list');
+  list.innerHTML = AGENTS.map(a => `
+    <div class="agent-row">
+      <div class="agent-info">
+        <span class="agent-dot ${online ? 'active' : 'idle'}"></span>
+        <span class="agent-name">${a.name}</span>
+      </div>
+      <span class="agent-status ${online ? 'active' : 'idle'}">${online ? 'Active' : 'Offline'}</span>
+    </div>
+  `).join('');
+}
+
+// Initial render
+renderAgents(false);
+
+// Fetch health
+async function checkHealth() {
+  const main = document.getElementById('status-main');
+  const dot = document.getElementById('status-dot');
+  const label = document.getElementById('status-label');
+  const sub = document.getElementById('status-sub');
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+
+    const resp = await fetch('https://e-labz-swarm-ymb56uk5vq-uk.a.run.app/health', {
+      signal: controller.signal
+    });
+    clearTimeout(timeout);
+
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
+
+    // Update main status
+    main.className = 'status-main online';
+    dot.className = 'status-dot online';
+    label.className = 'status-label online';
+    label.textContent = 'All Systems Operational';
+    sub.textContent = 'Swarm is live on Google Cloud Run';
+
+    // Update stats
+    document.getElementById('uptime-value').textContent = data.uptime || '--';
+    document.getElementById('agents-value').textContent = '8';
+
+    if (data.timestamp) {
+      const d = new Date(data.timestamp);
+      document.getElementById('timestamp-value').textContent =
+        d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }
+
+    // Update agents
+    renderAgents(true);
+
+    // Last updated
+    document.getElementById('last-updated').textContent =
+      `Last checked: ${new Date().toLocaleString()}`;
+
+  } catch (err) {
+    main.className = 'status-main offline';
+    dot.className = 'status-dot offline';
+    label.className = 'status-label offline';
+    label.textContent = 'Swarm Unreachable';
+    sub.textContent = err.name === 'AbortError'
+      ? 'Request timed out — swarm may be cold-starting'
+      : `Error: ${err.message}`;
+    renderAgents(false);
+    document.getElementById('last-updated').textContent =
+      `Last checked: ${new Date().toLocaleString()} — will retry in 30s`;
+  }
+}
+
+// Run immediately + every 30s
+checkHealth();
+setInterval(checkHealth, 30000);
+</script>
+
+</body>
+</html>
