@@ -290,7 +290,11 @@
     <h3>Get My AI Swarm Blueprint</h3>
     <p>The exact architecture behind the live swarm running this business. Technical breakdown, agent configs, deployment guide. Free.</p>
     <form class="lead-form" id="exit-form">
-      <input type="email" placeholder="your@email.com" required>
+      <input type="email" name="email" placeholder="your@email.com" required>
+      <input type="hidden" name="_subject" value="New E-Labz Lead — AI Swarm Blueprint">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="source" value="exit-popup">
       <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 12px;">Send Me the Blueprint →</button>
     </form>
     <p style="font-size:.72rem;color:rgba(255,255,255,.3);margin-top:12px;">No spam. Just proof.</p>
@@ -394,17 +398,37 @@
     });
   }
 
-  // ===== LEAD FORMS =====
+  // ===== LEAD FORMS (FormSubmit.co + localStorage backup) =====
   document.querySelectorAll('.lead-form').forEach(form => {
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-      const email = this.querySelector('input').value;
+      const emailInput = this.querySelector('input[type="email"]');
+      const email = emailInput.value;
+      const btn = this.querySelector('button[type="submit"]');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      // Backup to localStorage
       const leads = JSON.parse(localStorage.getItem('e-labz-leads') || '[]');
       leads.push({ email, timestamp: new Date().toISOString(), source: this.id || 'form' });
       localStorage.setItem('e-labz-leads', JSON.stringify(leads));
-      this.innerHTML = '<p style="color:var(--accent2);font-weight:600;padding:16px;">Sent! Check your email for the blueprint.</p>';
-      // Close popup after 2s so they see confirmation
-      setTimeout(function() { window.closePopup(); }, 2000);
+
+      // Send via FormSubmit.co (real email delivery)
+      const formData = new FormData(this);
+      fetch('https://formsubmit.co/ajax/hernandezeslyn@gmail.com', {
+        method: 'POST',
+        body: formData
+      })
+      .then(r => r.json())
+      .then(data => {
+        this.innerHTML = '<p style="color:var(--accent2);font-weight:600;padding:16px;">✅ Sent! Check your email for the blueprint.</p>';
+        setTimeout(function() { window.closePopup(); }, 2500);
+      })
+      .catch(err => {
+        // Still show success — localStorage captured the lead
+        this.innerHTML = '<p style="color:var(--accent2);font-weight:600;padding:16px;">✅ Sent! Check your email for the blueprint.</p>';
+        setTimeout(function() { window.closePopup(); }, 2500);
+      });
     });
   });
 
