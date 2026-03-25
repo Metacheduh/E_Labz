@@ -1,0 +1,15 @@
+#!include:.gitignore
+
+# Additional excludes for Cloud Build (these are HUGE)
+archive/
+ADK_Pipelines/
+AI_Swarm/
+portfolio/
+docs/
+tests/
+.agents/
+.pytest_cache/
+.netlify/
+*.md
+ls_sync_results.json
+from

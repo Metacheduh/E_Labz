@@ -1,0 +1,46 @@
+# E-Labz Swarm — Docker Compose
+# Run: docker-compose up -d
+version: "3.9"
+
+services:
+  swarm:
+    build: .
+    container_name: e-labz-swarm
+    restart: unless-stopped
+    ports:
+      - "8080:8080"  # Dashboard API
+      - "8081:8081"  # Webhook handler
+    volumes:
+      - ./data:/app/data
+      - ./output:/app/output
+      - ./config:/app/config
+    env_file:
+      - ./config/.env
+    environment:
+      - TZ=America/New_York
+      - PYTHONUNBUFFERED=1
+      - AGENT_ZERO_URL=http://agent-zero:50001
+    depends_on:
+      - agent-zero
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  agent-zero:
+    image: frdel/agent-zero:latest
+    container_name: e-labz-agent-zero
+    restart: unless-stopped
+    ports:
+      - "50001:50001"
+    volumes:
+      - ./data/agent_zero:/app/work_dir  # Shared workspace
+    environment:
+      - TZ=America/New_York
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:50001/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

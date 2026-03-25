@@ -28,3 +28,8 @@
 In 2026, the AI landscape...
 2026-03-24 10:30:00 | INFO    | swarm | ⏰ SCHEDULER [job_start]: reply_engagement 
 2026-03-24 10:30:10 | INFO    | swarm | ⏰ SCHEDULER [job_start]: reply_engagement 
+2026-03-24 14:11:25 | INFO    | swarm | No GOODMEM_API_KEY set, falling back to local memory
+2026-03-24 14:11:25 | INFO    | swarm | 🧠 Local memory initialized: /Users/eslynjosephhernandez/Documents/untitled folder/E_Labz/data/memory.db
+2026-03-24 14:11:25 | INFO    | swarm | 🧠 Memory service initialized in local mode
+2026-03-24 14:11:25 | INFO    | swarm | 💰 Stripe client initialized
+2026-03-24 14:11:25 | INFO    | swarm | elevenlabs package not installed — pip install elevenlabs

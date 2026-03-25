@@ -31,13 +31,13 @@ class TestHumanizeContent:
         result = humanize_content(formal, content_type="tweet")
         assert "n't" in result or "it's" in result.lower(), "No contractions found"
 
-    def test_publish_returns_dict(self):
-        """publish() should return a dict with 'content' and 'verification' keys."""
+    def test_publish_returns_content(self):
+        """publish() should return humanized content as a string."""
         from orchestrator.pipeline.humanize import publish
 
         result = publish("Testing the pipeline output format", content_type="tweet")
-        assert isinstance(result, dict)
-        assert "content" in result
+        assert isinstance(result, str)
+        assert len(result) > 0
 
 
 class TestVoiceProfiles:

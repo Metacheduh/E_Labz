@@ -1,5 +1,14 @@
+# Core
 schedule>=1.2.0
 python-dotenv>=1.0.0
 pyyaml>=6.0
 requests>=2.31.0
 tweepy>=4.14.0
+
+# Revenue
+stripe>=8.0.0
+
+# Optional ADK (uncomment when google-adk is stable on PyPI)
+# google-adk>=1.0.0
+# goodmem-adk>=0.1.0
+# agentops>=0.3.0

@@ -2,7 +2,7 @@ import os
 import json
 import re
 from pathlib import Path
-from orchestrator.store import get_store
+from orchestrator.publish.store import get_store
 
 # Config
 PORTFOLIO_DIR = Path(__file__).parent.parent / "portfolio"

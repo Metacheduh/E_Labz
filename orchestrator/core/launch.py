@@ -73,7 +73,7 @@ def health_check():
     # 1. Twitter connection
     total += 1
     try:
-        from orchestrator.twitter import get_me
+        from orchestrator.publish.twitter import get_me
         me = get_me()
         print(f"  ✅ Twitter: @{me['username']} ({me['name']})")
         passed += 1
@@ -83,7 +83,7 @@ def health_check():
     # 2. Research
     total += 1
     try:
-        from orchestrator.research import search_tavily
+        from orchestrator.pipeline.research import search_tavily
         results = search_tavily("AI tools", max_results=1)
         if results:
             print(f"  ✅ Research: Tavily returned {len(results)} result(s)")
@@ -96,7 +96,7 @@ def health_check():
     # 3. Humanization
     total += 1
     try:
-        from orchestrator.humanize import humanize_content, verify_human
+        from orchestrator.pipeline.humanize import humanize_content, verify_human
         humanized = humanize_content("AI is transforming how we work and live today.")
         result = verify_human(humanized)
         if result.get("passed"):
@@ -157,7 +157,7 @@ def launch():
         print("  ⚠️ SWARM_ENABLED is false in .env — set to true to launch")
         return
 
-    from orchestrator.scheduler import main
+    from orchestrator.core.scheduler import main
     main()
 
 

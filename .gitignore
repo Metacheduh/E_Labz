@@ -26,6 +26,18 @@ output/tweets/*.json
 data/metrics.db
 data/performance/*.json
 
+# Cache
+.pytest_cache/
+__pycache__/
+
+# Data (sensitive / runtime)
+data/replied_*.json
+data/x_cookies.*
+data/memory.db
+
+# Logs (rotated)
+logs/*.log.*
+
 # OS
 .DS_Store
 Thumbs.db
