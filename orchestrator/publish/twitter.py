@@ -10,6 +10,7 @@ Typefully was never used for actual posting. Twitter API is read-only.
 
 import os
 import json
+from datetime import datetime
 from pathlib import Path
 from orchestrator import PROJECT_ROOT
 from typing import Optional
@@ -38,39 +39,30 @@ POSTING_METHOD = os.getenv("POSTING_METHOD", "browser")  # browser, typefully, a
 def _typefully_post(text: str, schedule: bool = False, thread_tweets: list = None) -> dict:
     """Post via Typefully API v2.
     
-    Previous v1 code had wrong auth header format (X-API-KEY: Bearer key).
-    v2 uses standard Authorization: Bearer header.
+    v2 flow (December 2025+):
+    1. POST /v2/social-sets/{id}/drafts  → creates draft
+    2. PATCH /v2/social-sets/{id}/drafts/{draft_id}  → set publish_at to schedule
+    
+    Auth: Authorization: Bearer KEY
+    Social Set: 289361 (@JEH005432 / AutoStackHQ)
     """
     if not TYPEFULLY_API_KEY:
         return {"error": "No TYPEFULLY_API_KEY"}
 
-    # First, get the social set ID (cached after first call)
-    if not hasattr(_typefully_post, "_social_set_id"):
-        try:
-            sets_resp = requests.get(
-                "https://api.typefully.com/v2/social-sets",
-                headers={"Authorization": f"Bearer {TYPEFULLY_API_KEY}"},
-            )
-            if sets_resp.status_code == 200:
-                results = sets_resp.json().get("results", [])
-                if results:
-                    _typefully_post._social_set_id = results[0]["id"]
-                else:
-                    return {"error": "No Typefully social sets found"}
-            else:
-                return {"error": f"Typefully sets {sets_resp.status_code}: {sets_resp.text}"}
-        except Exception as e:
-            return {"error": f"Typefully connection failed: {e}"}
+    SOCIAL_SET_ID = os.getenv("TYPEFULLY_SOCIAL_SET_ID", "289361")
+    BASE = f"https://api.typefully.com/v2/social-sets/{SOCIAL_SET_ID}"
+    HEADERS = {
+        "Authorization": f"Bearer {TYPEFULLY_API_KEY}",
+        "Content-Type": "application/json",
+    }
 
-    social_set_id = _typefully_post._social_set_id
-
-    # Build v2 draft payload
+    # Build v2 draft payload (no publish_at here — v2 rejects it in create)
     if thread_tweets:
         posts = [{"text": t} for t in thread_tweets]
     else:
         posts = [{"text": text}]
 
-    payload = {
+    create_payload = {
         "platforms": {
             "x": {
                 "enabled": True,
@@ -79,31 +71,62 @@ def _typefully_post(text: str, schedule: bool = False, thread_tweets: list = Non
         },
     }
 
-    # Set scheduling
+    # Step 1: Create the draft
+    try:
+        resp = requests.post(
+            f"{BASE}/drafts",
+            headers=HEADERS,
+            json=create_payload,
+        )
+    except Exception as e:
+        return {"error": f"Typefully connection failed: {e}"}
+
+    if resp.status_code not in (200, 201):
+        return {"error": f"Typefully create {resp.status_code}: {resp.text}"}
+
+    data = resp.json()
+    draft_id = data.get("id")
+    if not draft_id:
+        return {"error": "Typefully returned no draft ID"}
+
+    # Step 2: Schedule/publish via PATCH with publish_at
+    from datetime import timezone, timedelta
+    now_utc = datetime.now(timezone.utc)
+
     if schedule:
-        payload["publish_at"] = "next-free-slot"
+        # Schedule for next hour
+        publish_time = now_utc + timedelta(hours=1)
     else:
-        payload["publish_at"] = "now"
+        # Publish ASAP — 90 seconds from now (API rejects past timestamps)
+        publish_time = now_utc + timedelta(seconds=90)
 
-    resp = requests.post(
-        f"https://api.typefully.com/v2/social-sets/{social_set_id}/drafts",
-        headers={
-            "Authorization": f"Bearer {TYPEFULLY_API_KEY}",
-            "Content-Type": "application/json",
-        },
-        json=payload,
-    )
+    publish_at = publish_time.strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
-    if resp.status_code in (200, 201):
-        data = resp.json()
-        return {
-            "status": "posted" if not schedule else "scheduled",
-            "id": data.get("id", ""),
-            "text": text[:280] if not thread_tweets else thread_tweets[0][:280],
-            "method": "typefully_v2",
-        }
-    else:
-        return {"error": f"Typefully v2 {resp.status_code}: {resp.text}"}
+    try:
+        patch_resp = requests.patch(
+            f"{BASE}/drafts/{draft_id}",
+            headers=HEADERS,
+            json={"publish_at": publish_at},
+        )
+        if patch_resp.status_code in (200, 201):
+            patch_data = patch_resp.json()
+            status = patch_data.get("status", "scheduled")
+        else:
+            # Draft was created but scheduling failed — still a partial success
+            status = "draft_only"
+            print(f"⚠️ Draft created (ID: {draft_id}) but scheduling failed: {patch_resp.text}")
+    except Exception as e:
+        status = "draft_only"
+        print(f"⚠️ Draft created (ID: {draft_id}) but scheduling failed: {e}")
+
+    return {
+        "status": status,
+        "id": draft_id,
+        "text": text[:280] if not thread_tweets else thread_tweets[0][:280],
+        "method": "typefully_v2",
+        "publish_at": publish_at,
+        "private_url": data.get("private_url", ""),
+    }
 
 
 # ============================================================
@@ -172,8 +195,8 @@ def get_my_tweets(count: int = 10) -> list[dict]:
 def post_tweet(text: str, humanize: bool = True, dry_run: bool = False, schedule: bool = False) -> dict:
     """Post a single tweet.
 
-    Posting priority: Browser > Typefully > API
-    (Browser is primary per resolved decision 2026-03-19)
+    Posting priority: Typefully v2 > Browser > API
+    (Typefully is primary — reliable scheduled publishing via API)
     """
     # Humanize content
     if humanize:
@@ -190,7 +213,17 @@ def post_tweet(text: str, humanize: bool = True, dry_run: bool = False, schedule
     if dry_run:
         return {"status": "dry_run", "text": content, "length": len(content)}
 
-    # Try browser posting first (primary method)
+    # Try Typefully first (primary method)
+    if TYPEFULLY_API_KEY:
+        result = _typefully_post(content, schedule=schedule)
+        if "error" not in result:
+            print(f"✅ Tweet posted via Typefully: {content[:60]}...")
+            result["text"] = content
+            result["length"] = len(content)
+            return result
+        print(f"⚠️ Typefully error: {result['error']}")
+
+    # Fallback: Browser posting
     try:
         from orchestrator.publish.browser_poster import browser_post_tweet
         result = browser_post_tweet(content)
@@ -200,16 +233,6 @@ def post_tweet(text: str, humanize: bool = True, dry_run: bool = False, schedule
         print(f"⚠️ Browser posting returned: {result.get('status', 'unknown')}")
     except Exception as e:
         print(f"⚠️ Browser posting failed: {e}")
-
-    # Fallback: Typefully
-    if TYPEFULLY_API_KEY:
-        result = _typefully_post(content, schedule=schedule)
-        if "error" not in result:
-            print(f"✅ Tweet posted via Typefully: {content[:60]}...")
-            result["text"] = content
-            result["length"] = len(content)
-            return result
-        print(f"⚠️ Typefully error: {result['error']}")
 
     return {"status": "failed", "reason": "No posting method available"}
 
@@ -240,7 +263,14 @@ def post_thread(tweets: list[str], humanize: bool = True, dry_run: bool = False,
             "tweets": [{"text": t, "length": len(t)} for t in processed],
         }
 
-    # Try browser posting first (primary method — posts individually)
+    # Try Typefully first (supports threads natively)
+    if TYPEFULLY_API_KEY:
+        result = _typefully_post(processed[0], schedule=schedule, thread_tweets=processed)
+        if "error" not in result:
+            print(f"✅ Thread posted via Typefully ({len(processed)} tweets)")
+            return {"status": "posted", "total": len(processed), "method": "typefully_v2", "tweets": processed}
+
+    # Fallback: Browser posting (posts individually)
     try:
         from orchestrator.publish.browser_poster import browser_post_tweet
         import time
@@ -255,12 +285,5 @@ def post_thread(tweets: list[str], humanize: bool = True, dry_run: bool = False,
             return {"status": "posted", "total": len(posted), "method": "browser", "tweets": results}
     except Exception as e:
         print(f"⚠️ Browser thread posting failed: {e}")
-
-    # Fallback: Typefully (supports threads natively)
-    if TYPEFULLY_API_KEY:
-        result = _typefully_post(processed[0], schedule=schedule, thread_tweets=processed)
-        if "error" not in result:
-            print(f"✅ Thread posted via Typefully ({len(processed)} tweets)")
-            return {"status": "posted", "total": len(processed), "method": "typefully", "tweets": processed}
 
     return {"status": "failed", "reason": "No posting method available"}
