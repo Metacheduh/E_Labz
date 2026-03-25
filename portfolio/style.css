@@ -131,8 +131,8 @@ a:hover { color: #fff; }
 
 /* Store card images */
 .store-card-img {
-  width:100%; height:160px; object-fit:cover; border-radius:var(--radius-sm);
-  margin-bottom:16px; opacity:.85;
+  width:100%; height:100px; object-fit:cover; border-radius:var(--radius-sm);
+  margin-bottom:10px; opacity:.85;
 }
 .hero-badge {
   display:inline-flex; align-items:center; gap:8px;
@@ -368,10 +368,10 @@ a:hover { color: #fff; }
 .tab.active { background: rgba(139,92,246,.1); border-color: rgba(139,92,246,.3); color: #fff; box-shadow: 0 0 20px rgba(139,92,246,.1); }
 .tab:hover { border-color: rgba(255,255,255,.15); color: var(--text); }
 
-.store-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 16px; }
+.store-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .store-card {
   background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
-  border-radius: var(--radius); padding: 32px; transition: .4s;
+  border-radius: var(--radius); padding: 20px; transition: .4s;
   position: relative; overflow: hidden;
 }
 .store-card::before {
@@ -380,12 +380,12 @@ a:hover { color: #fff; }
   opacity:0; transition: opacity .4s;
 }
 .store-card:hover::before { opacity:1; }
-.store-card:hover { border-color: rgba(6,214,160,.3); transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,.3); }
+.store-card:hover { border-color: rgba(6,214,160,.3); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,.3); }
 .store-card.featured-product { border-color: rgba(247,37,133,.2); background: linear-gradient(135deg, rgba(247,37,133,.03), rgba(139,92,246,.03)); }
-.store-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
-.store-card p { font-size: .88rem; color: var(--text-dim); margin-bottom: 16px; font-weight: 300; }
-.store-card ul { list-style: none; margin-bottom: 20px; }
-.store-card li { font-size: .83rem; color: var(--text-dim); padding: 4px 0; }
+.store-card h3 { font-size: .95rem; font-weight: 700; margin-bottom: 6px; }
+.store-card p { font-size: .78rem; color: var(--text-dim); margin-bottom: 10px; font-weight: 300; line-height: 1.5; }
+.store-card ul { list-style: none; margin-bottom: 12px; }
+.store-card li { font-size: .75rem; color: var(--text-dim); padding: 2px 0; }
 
 /* ─── Services ─── */
 .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
