@@ -4,12 +4,15 @@ Cron-based daily automation. This is the heartbeat of the swarm.
 Start: python -m orchestrator.scheduler
 """
 
+import json
 import os
 import random
 import signal
 import sys
 import time
+import threading
 from datetime import datetime
+from http.server import HTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 from orchestrator import PROJECT_ROOT
 
@@ -485,6 +488,44 @@ def handle_shutdown(signum, frame):
 # ============================================================
 # MAIN
 # ============================================================
+# HEALTH ENDPOINT — Cloud Run needs an HTTP listener
+# ============================================================
+
+class _HealthHandler(BaseHTTPRequestHandler):
+    """Minimal health check handler for Cloud Run."""
+    def do_GET(self):
+        if self.path == "/health" or self.path == "/":
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            status = {
+                "status": "healthy",
+                "service": "swarm-scheduler",
+                "uptime": datetime.now().isoformat(),
+                "jobs": len(schedule.get_jobs()),
+                "next_run": str(schedule.next_run()) if schedule.get_jobs() else "none",
+            }
+            self.wfile.write(json.dumps(status).encode())
+        else:
+            self.send_response(404)
+            self.end_headers()
+
+    def log_message(self, format, *args):
+        """Suppress default HTTP logs to keep console clean."""
+        pass
+
+
+def _start_health_server(port: int = 8080):
+    """Start a background HTTP server for Cloud Run health checks."""
+    server = HTTPServer(("0.0.0.0", port), _HealthHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    print(f"🏥 Health server listening on port {port}")
+
+
+# ============================================================
+# MAIN ENTRY
+# ============================================================
 
 def main():
     """Start the swarm. This runs forever."""
@@ -524,7 +565,12 @@ def main():
         log_error("initial_sync", str(e))
         print(f"   ⚠️ Initial sync failed: {e}")
 
+    # Start health endpoint for Cloud Run (threaded, non-blocking)
+    port = int(os.getenv("PORT", 8080))
+    _start_health_server(port)
+
     print(f"\n🚀 Swarm is running. Next job: {schedule.next_run()}")
+    print(f"   Health endpoint: http://0.0.0.0:{port}/health")
     print("   Press Ctrl+C to stop.\n")
     swarm_log.info(f"🚀 Swarm loop started. Next job: {schedule.next_run()}")
 
